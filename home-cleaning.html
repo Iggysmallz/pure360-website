@@ -3,8 +3,8 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home Cleaning - Pure360</title>
-    <link rel="icon" href="new-logo.png" type="image/png">
+    <title>Book Your Home Cleaning Service - Pure360</title>
+    <link rel="icon" href="Assets/Pure%20(1).png" type="image/png">
     <style>
         :root {
             --main-blue: #29a8c2;
@@ -45,20 +45,15 @@
         nav ul li a:hover {
             text-decoration: underline;
         }
-        .service-details {
+        .booking-section {
             padding: 2rem 1rem;
             max-width: 800px;
             margin: 0 auto;
         }
-        .service-details h2 {
+        .booking-section h2 {
             text-align: center;
             font-size: 2rem;
             margin-bottom: 1rem;
-        }
-        .service-details p {
-            font-size: 1.2rem;
-            margin-bottom: 2rem;
-            text-align: justify;
         }
         .booking-form {
             background-color: var(--main-white);
@@ -109,35 +104,42 @@
 </head>
 <body>
     <header>
-        <img src="new-logo.png" alt="Pure360 Logo">
-        <h1>Home Cleaning - Pure360</h1>
+        <img src="Assets/Pure%20(1).png" alt="Pure360 Logo">
+        <h1>Book Your Home Cleaning Service - Pure360</h1>
         <nav>
             <ul>
                 <li><a href="index.html">Home</a></li>
-                <li><a href="deep-cleaning.html">Deep Cleaning</a></li>
-                <li><a href="window-cleaning.html">Window Cleaning</a></li>
-                <li><a href="pool-cleaning.html">Pool Cleaning</a></li>
-                <li><a href="gardening.html">Gardening</a></li>
-                <li><a href="bin-cleaning.html">Bin Cleaning</a></li>
-                <li><a href="car-wash.html">Car Wash</a></li>
+                <li><a href="contact.html">Contact Us</a></li>
             </ul>
         </nav>
     </header>
-    <section class="service-details">
-        <h2>Home Cleaning Services</h2>
-        <p>Regular cleaning for homes and apartments. Includes dusting, vacuuming, mopping, kitchen and bathroom cleaning. Affordable and tailored to your needs.</p>
+    <section class="booking-section">
+        <h2>Book Your Cleaning Service</h2>
         <div class="booking-form">
             <form action="submit-booking.php" method="POST">
+                <label for="cleaning-type">Cleaning Type:</label>
+                <select id="cleaning-type" name="cleaning-type" required>
+                    <option value="home-cleaning">Home Cleaning</option>
+                </select>
+                
                 <label for="name">Your Name:</label>
                 <input type="text" id="name" name="name" required>
+                
                 <label for="email">Your Email:</label>
                 <input type="email" id="email" name="email" required>
+                
                 <label for="phone">Your Phone:</label>
                 <input type="tel" id="phone" name="phone" required>
+                
                 <label for="service-date">Preferred Service Date:</label>
                 <input type="date" id="service-date" name="service-date" required>
+                
                 <label for="address">Address:</label>
                 <textarea id="address" name="address" rows="3" required></textarea>
+
+                <label for="additional-info">Additional Information:</label>
+                <textarea id="additional-info" name="additional-info" rows="3"></textarea>
+                
                 <button type="submit">Book Now</button>
             </form>
         </div>
