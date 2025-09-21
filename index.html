@@ -1,100 +1,187 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Pure360</title>
-    <link rel="icon" href="Assets/Pure%20(1).png" type="image/png">
-    <style>
-        :root {
-            --main-blue: #29a8c2;
-            --main-dark: #32444e;
-            --main-light: #f8fafd;
-            --main-white: #ffffff;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--main-light);
-            color: var(--main-dark);
-        }
-        header {
-            background-color: var(--main-blue);
-            color: var(--main-white);
-            padding: 1rem 0;
-            text-align: center;
-        }
-        header img {
-            height: 80px;
-            margin-bottom: 0.5rem;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        nav ul li a {
-            color: var(--main-white);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-        .hero {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--main-blue);
-            color: var(--main-white);
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-        }
-        footer {
-            background-color: var(--main-dark);
-            color: var(--main-white);
-            padding: 2rem 0;
-            text-align: center;
-        }
-        footer a {
-            color: var(--main-blue);
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>CFJZ Cleaning Services</title>
+  <style>
+    body {
+      margin: 0;
+      font-family: Arial, sans-serif;
+      background-color: #000;
+      color: #fff;
+    }
+
+    /* Header */
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background-color: #000;
+      padding: 15px 40px;
+      border-bottom: 2px solid #7FFF00;
+    }
+
+    header img {
+      height: 60px;
+    }
+
+    header h1 {
+      font-size: 20px;
+      margin: 0;
+    }
+
+    header p {
+      margin: 0;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    /* Navigation */
+    nav ul {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      gap: 25px;
+    }
+
+    nav ul li a {
+      text-decoration: none;
+      color: #fff;
+      font-weight: bold;
+      transition: color 0.3s;
+    }
+
+    nav ul li a:hover {
+      color: #7FFF00;
+    }
+
+    /* Hero Section */
+    .hero {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 400px;
+      background: url('your-animation-or-placeholder.jpg') center/cover no-repeat;
+      text-align: center;
+      position: relative;
+    }
+
+    .hero h2 {
+      font-size: 36px;
+      color: #7FFF00;
+      text-shadow: 2px 2px 5px #000;
+    }
+
+    .hero p {
+      font-size: 20px;
+      color: #fff;
+    }
+
+    /* Services form */
+    .services {
+      padding: 50px;
+      background-color: #111;
+      text-align: center;
+    }
+
+    label {
+      display: block;
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    select {
+      padding: 10px;
+      width: 300px;
+      border: 2px solid #7FFF00;
+      border-radius: 5px;
+      background-color: #000;
+      color: #fff;
+    }
+
+    button {
+      margin-top: 20px;
+      padding: 12px 30px;
+      border: none;
+      border-radius: 5px;
+      background-color: #7FFF00;
+      color: #000;
+      font-weight: bold;
+      cursor: pointer;
+      transition: background-color 0.3s;
+    }
+
+    button:hover {
+      background-color: #66cc00;
+    }
+
+    /* Footer */
+    footer {
+      background-color: #000;
+      padding: 20px;
+      text-align: center;
+      border-top: 2px solid #7FFF00;
+      font-size: 14px;
+      color: #ccc;
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <img src="Assets/Pure%20(1).png" alt="Pure360 Logo">
-        <h1>Pure360 Cleaning Services</h1>
-        <nav>
-            <ul>
-                <li><a href="home-cleaning.html">Home Cleaning</a></li>
-                <li><a href="deep-cleaning.html">Deep Cleaning</a></li>
-                <li><a href="window-cleaning.html">Window Cleaning</a></li>
-                <li><a href="pool-cleaning.html">Pool Cleaning</a></li>
-                <li><a href="gardening.html">Gardening</a></li>
-                <li><a href="bin-cleaning.html">Bin Cleaning</a></li>
-                <li><a href="car-wash.html">Car Wash</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="hero">
-        <h1>Welcome to Pure360</h1>
-        <p>Providing trusted and affordable cleaning services tailored to your needs.</p>
-    </section>
-    <footer>
-        <p>&copy; 2025 Pure360 Cleaning Services | <a href="contact.html">Contact Us</a></p>
-    </footer>
+
+  <header>
+    <div class="logo">
+      <img src="cfjz-logo.png" alt="CFJZ Cleaning Services">
+    </div>
+    <div class="brand-text">
+      <h1>CFJZ Cleaning Services</h1>
+      <p>Our reputation is spotless</p>
+    </div>
+    <nav>
+      <ul>
+        <li><a href="#">Home</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#about">About Us</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+
+  <section class="hero">
+    <div>
+      <h2>Welcome to CFJZ Cleaning Services</h2>
+      <p>Our reputation is spotless</p>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <h2>Choose a Cleaning Service</h2>
+    <form>
+      <label for="cleaning-services">Select a service:</label>
+      <select id="cleaning-services" name="cleaning-services">
+        <option value="domestic-standard-cleaning">Domestic Standard Cleaning</option>
+        <option value="house-deep-cleaning">House Deep Cleaning</option>
+        <option value="window-cleaning">Window Cleaning</option>
+        <option value="oven-cleaning">Oven Cleaning</option>
+        <option value="mould-removal">Mould Removal</option>
+        <option value="carpet-rug-cleaning">Carpet & Rug Cleaning</option>
+        <option value="mattress-cleaning">Mattress Cleaning</option>
+        <option value="base-headboard-cleaning">Base & Headboard Cleaning</option>
+        <option value="upholstery-cleaning">Upholstery Cleaning</option>
+        <option value="ottoman-dining-wingback-cleaning">Ottoman, Dining Room Chairs & Wingback Chair Cleaning</option>
+        <option value="kitchen-deep-cleaning">Kitchen Deep Cleaning</option>
+        <option value="mobile-carwash">Mobile Carwash</option>
+        <option value="mobile-car-valet">Mobile Car Valet</option>
+      </select>
+      <br>
+      <button type="submit">Submit</button>
+    </form>
+  </section>
+
+  <footer>
+    <p>&copy; 2025 CFJZ Cleaning Services. All Rights Reserved.</p>
+  </footer>
+
 </body>
 </html>
