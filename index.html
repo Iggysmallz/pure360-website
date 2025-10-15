@@ -1,100 +1,682 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Pure360</title>
-    <link rel="icon" href="Assets/Pure%20(1).png" type="image/png">
-    <style>
-        :root {
-            --main-blue: #29a8c2;
-            --main-dark: #32444e;
-            --main-light: #f8fafd;
-            --main-white: #ffffff;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--main-light);
-            color: var(--main-dark);
-        }
-        header {
-            background-color: var(--main-blue);
-            color: var(--main-white);
-            padding: 1rem 0;
-            text-align: center;
-        }
-        header img {
-            height: 80px;
-            margin-bottom: 0.5rem;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        nav ul li a {
-            color: var(--main-white);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-        .hero {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--main-blue);
-            color: var(--main-white);
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-        }
-        footer {
-            background-color: var(--main-dark);
-            color: var(--main-white);
-            padding: 2rem 0;
-            text-align: center;
-        }
-        footer a {
-            color: var(--main-blue);
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Southfield Neighbourhood Watch</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @keyframes pulse {
+      0%,100% { opacity: 1; }
+      50% { opacity: 0.5; }
+    }
+    .animate-pulse {
+      animation: pulse 2s cubic-bezier(0.4,0,0.6,1) infinite;
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <img src="Assets/Pure%20(1).png" alt="Pure360 Logo">
-        <h1>Pure360 Cleaning Services</h1>
-        <nav>
-            <ul>
-                <li><a href="home-cleaning.html">Home Cleaning</a></li>
-                <li><a href="deep-cleaning.html">Deep Cleaning</a></li>
-                <li><a href="window-cleaning.html">Window Cleaning</a></li>
-                <li><a href="pool-cleaning.html">Pool Cleaning</a></li>
-                <li><a href="gardening.html">Gardening</a></li>
-                <li><a href="bin-cleaning.html">Bin Cleaning</a></li>
-                <li><a href="car-wash.html">Car Wash</a></li>
-            </ul>
+<body class="bg-gradient-to-br from-gray-50 to-gray-100">
+  <!-- Header -->
+  <header class="bg-black shadow-xl sticky top-0 z-50 border-b-4 border-yellow-400">
+    <div class="max-w-7xl mx-auto px-4 py-4">
+      <div class="flex items-center justify-between">
+        <div class="flex items-center gap-4">
+          <div class="w-12 h-12 rounded-full bg-yellow-400 flex items-center justify-center">
+            <div class="w-8 h-8 rounded-full bg-black flex items-center justify-center">
+              <div class="w-3 h-3 rounded-full bg-yellow-400"></div>
+            </div>
+          </div>
+          <div>
+            <h1 class="text-xl font-black text-yellow-400">SOUTHFIELD</h1>
+            <p class="text-yellow-400 text-xs font-bold">NEIGHBOURHOOD WATCH</p>
+          </div>
+        </div>
+
+        <!-- Desktop Navigation -->
+        <nav class="hidden md:flex gap-2" id="desktop-nav">
+          <button onclick="showPage('home')" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all bg-yellow-400 text-black">
+            Home
+          </button>
+          <button onclick="showPage('reports')" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900">
+            Incident Reports
+          </button>
+          <button onclick="showPage('map')" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900">
+            Safety Map
+          </button>
+          <button onclick="showPage('businesses')" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900">
+            Local Businesses
+          </button>
+          <button onclick="showPage('events')" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900">
+            Events & Patrols
+          </button>
+          <button onclick="showPage('contact')" class="nav-btn px-4 py-2 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900">
+            Contact
+          </button>
         </nav>
-    </header>
-    <section class="hero">
-        <h1>Welcome to Pure360</h1>
-        <p>Providing trusted and affordable cleaning services tailored to your needs.</p>
-    </section>
-    <footer>
-        <p>&copy; 2025 Pure360 Cleaning Services | <a href="contact.html">Contact Us</a></p>
-    </footer>
+
+        <!-- Mobile Menu Button -->
+        <button onclick="toggleMobileMenu()" class="md:hidden text-yellow-400" id="mobile-menu-btn" aria-label="Toggle menu">
+          <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+          </svg>
+        </button>
+      </div>
+
+      <!-- Mobile Navigation -->
+      <nav class="hidden mt-4 space-y-2 md:hidden" id="mobile-nav">
+        <button onclick="showPage('home'); toggleMobileMenu()" class="w-full px-4 py-3 rounded-lg font-bold transition-all bg-yellow-400 text-black text-left">Home</button>
+        <button onclick="showPage('reports'); toggleMobileMenu()" class="w-full px-4 py-3 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900 text-left">Incident Reports</button>
+        <button onclick="showPage('map'); toggleMobileMenu()" class="w-full px-4 py-3 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900 text-left">Safety Map</button>
+        <button onclick="showPage('businesses'); toggleMobileMenu()" class="w-full px-4 py-3 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900 text-left">Local Businesses</button>
+        <button onclick="showPage('events'); toggleMobileMenu()" class="w-full px-4 py-3 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900 text-left">Events & Patrols</button>
+        <button onclick="showPage('contact'); toggleMobileMenu()" class="w-full px-4 py-3 rounded-lg font-bold transition-all text-yellow-400 hover:bg-gray-900 text-left">Contact</button>
+      </nav>
+    </div>
+  </header>
+
+  <!-- Main Content -->
+  <main class="max-w-7xl mx-auto px-4 py-8">
+    <!-- Home Page -->
+    <div id="page-home" class="page-content space-y-8">
+      <div class="bg-gradient-to-br from-yellow-400 via-yellow-300 to-yellow-500 rounded-2xl p-8 shadow-2xl">
+        <div class="flex items-center justify-center mb-6">
+          <div class="relative">
+            <div class="w-32 h-32 rounded-full bg-black flex items-center justify-center">
+              <div class="w-24 h-24 rounded-full bg-yellow-400 flex items-center justify-center">
+                <div class="w-12 h-12 rounded-full bg-black"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+        <h1 class="text-5xl font-black text-black text-center mb-4">SOUTHFIELD</h1>
+        <h2 class="text-4xl font-black text-black text-center mb-4">NEIGHBOURHOOD WATCH</h2>
+        <p class="text-black text-center text-lg font-semibold">Keeping Our Community Safe Together</p>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-white rounded-xl p-6 shadow-lg border-4 border-yellow-400 hover:shadow-2xl transition-all">
+          <svg class="w-12 h-12 text-black mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+          <h3 class="text-2xl font-bold text-black mb-2">Active Patrols</h3>
+          <p class="text-gray-700 mb-4">24/7 community patrols keeping Southfield safe</p>
+          <div class="text-3xl font-black text-yellow-500">127</div>
+          <p class="text-sm text-gray-600">patrol hours this month</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-lg border-4 border-yellow-400 hover:shadow-2xl transition-all">
+          <svg class="w-12 h-12 text-black mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4.354a4 4 0 110 5.292M15 21H3v-1a6 6 0 0112 0v1zm0 0h6v-1a6 6 0 00-9-5.197M13 7a4 4 0 11-8 0 4 4 0 018 0z"/>
+          </svg>
+          <h3 class="text-2xl font-bold text-black mb-2">Active Members</h3>
+          <p class="text-gray-700 mb-4">Residents working together for safety</p>
+          <div class="text-3xl font-black text-yellow-500">342</div>
+          <p class="text-sm text-gray-600">registered members</p>
+        </div>
+
+        <div class="bg-white rounded-xl p-6 shadow-lg border-4 border-yellow-400 hover:shadow-2xl transition-all">
+          <svg class="w-12 h-12 text-black mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+          </svg>
+          <h3 class="text-2xl font-bold text-black mb-2">Recent Reports</h3>
+          <p class="text-gray-700 mb-4">Community-submitted incidents</p>
+          <div class="text-3xl font-black text-yellow-500" id="report-count">3</div>
+          <p class="text-sm text-gray-600">active reports</p>
+        </div>
+      </div>
+
+      <div class="bg-black rounded-xl p-8 text-white">
+        <h3 class="text-3xl font-black mb-6 text-yellow-400">Recent Activity</h3>
+        <div class="space-y-4" id="recent-reports">
+          <!-- Reports will be loaded here by JavaScript -->
+        </div>
+        <button onclick="showPage('reports')" class="mt-6 bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-all w-full">
+          View All Reports →
+        </button>
+      </div>
+
+      <div class="bg-yellow-400 rounded-xl p-8">
+        <h3 class="text-3xl font-black mb-4 text-black">Quick Actions</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <button onclick="showPage('reports')" class="bg-black text-yellow-400 px-6 py-4 rounded-lg font-bold hover:bg-gray-900 transition-all text-left">⚠️ Report an Incident</button>
+          <button onclick="showPage('map')" class="bg-black text-yellow-400 px-6 py-4 rounded-lg font-bold hover:bg-gray-900 transition-all text-left">📍 View Safety Map</button>
+          <button onclick="showPage('businesses')" class="bg-black text-yellow-400 px-6 py-4 rounded-lg font-bold hover:bg-gray-900 transition-all text-left">💼 Support Local Business</button>
+          <button onclick="showPage('events')" class="bg-black text-yellow-400 px-6 py-4 rounded-lg font-bold hover:bg-gray-900 transition-all text-left">📅 Join Next Patrol</button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Reports Page -->
+    <div id="page-reports" class="page-content space-y-8 hidden">
+      <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-8 shadow-xl">
+        <h2 class="text-4xl font-black text-black mb-2">Incident Reports</h2>
+        <p class="text-black text-lg font-semibold">Stay informed about what's happening in our community</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-8 shadow-lg border-4 border-yellow-400">
+        <h3 class="text-3xl font-black mb-6 text-black">Regular Patrol Schedule</h3>
+        <div class="overflow-x-auto">
+          <table class="w-full">
+            <thead>
+              <tr class="bg-black text-yellow-400">
+                <th class="p-4 text-left font-bold">Day</th>
+                <th class="p-4 text-left font-bold">Time</th>
+                <th class="p-4 text-left font-bold">Zone</th>
+                <th class="p-4 text-left font-bold">Status</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr class="border-b-2 border-gray-200">
+                <td class="p-4 font-bold">Monday - Friday</td>
+                <td class="p-4">18:00 - 06:00</td>
+                <td class="p-4">All Zones</td>
+                <td class="p-4"><span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">Active</span></td>
+              </tr>
+              <tr class="border-b-2 border-gray-200">
+                <td class="p-4 font-bold">Weekends</td>
+                <td class="p-4">20:00 - 04:00</td>
+                <td class="p-4">Priority Areas</td>
+                <td class="p-4"><span class="bg-green-500 text-white px-3 py-1 rounded-full text-sm font-bold">Active</span></td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+
+      <!-- Submit New Report -->
+      <div class="bg-yellow-50 border-4 border-yellow-400 rounded-xl p-8">
+        <h3 class="text-2xl font-bold mb-6 text-black">Submit New Report</h3>
+        <form id="report-form" class="space-y-4">
+          <div>
+            <label class="block text-black font-bold mb-2">Incident Type *</label>
+            <select id="report-type" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" required>
+              <option value="">Select type...</option>
+              <option>Suspicious Activity</option>
+              <option>Vehicle Break-in</option>
+              <option>Theft</option>
+              <option>Vandalism</option>
+              <option>Power Outage</option>
+              <option>Other</option>
+            </select>
+          </div>
+          <div>
+            <label class="block text-black font-bold mb-2">Location *</label>
+            <input type="text" id="report-location" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" placeholder="e.g., Main Rd & 5th Ave" required>
+          </div>
+          <div>
+            <label class="block text-black font-bold mb-2">Description (Optional)</label>
+            <textarea id="report-description" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none h-32" placeholder="Provide details about what you observed..."></textarea>
+          </div>
+          <button type="submit" class="bg-black text-yellow-400 px-8 py-3 rounded-lg font-bold hover:bg-gray-900 transition-all w-full">Submit Report</button>
+        </form>
+      </div>
+
+      <div class="bg-black rounded-xl p-8">
+        <h3 class="text-3xl font-black mb-6 text-yellow-400">All Reports</h3>
+        <div class="space-y-4" id="all-reports"><!-- populated by JS --></div>
+      </div>
+    </div>
+
+    <!-- Map Page -->
+    <div id="page-map" class="page-content space-y-8 hidden">
+      <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-8 shadow-xl">
+        <h2 class="text-4xl font-black text-black mb-2">Interactive Safety Map</h2>
+        <p class="text-black text-lg font-semibold">Real-time view of incidents and patrol zones</p>
+      </div>
+
+      <div class="bg-white rounded-xl p-4 shadow-lg border-4 border-yellow-400">
+        <div class="aspect-video bg-gray-100 rounded-lg flex items-center justify-center relative overflow-hidden">
+          <div class="absolute inset-0 bg-gradient-to-br from-green-100 to-green-200">
+            <div class="absolute top-1/4 left-1/3 w-3 h-3 bg-red-500 rounded-full animate-pulse"></div>
+            <div class="absolute top-1/2 left-1/2 w-3 h-3 bg-yellow-500 rounded-full animate-pulse"></div>
+            <div class="absolute top-2/3 left-2/3 w-3 h-3 bg-green-500 rounded-full"></div>
+          </div>
+          <div class="relative z-10 bg-white/90 p-6 rounded-lg text-center">
+            <svg class="w-16 h-16 text-yellow-500 mx-auto mb-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+            <p class="text-black font-bold">Interactive Map Coming Soon</p>
+            <p class="text-gray-600 text-sm mt-2">We're integrating with Google Maps for real-time tracking</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="grid md:grid-cols-3 gap-6">
+        <div class="bg-red-100 border-4 border-red-500 rounded-xl p-6">
+          <div class="w-6 h-6 bg-red-500 rounded-full mb-4"></div>
+          <h4 class="font-bold text-xl mb-2 text-black">Active Incidents</h4>
+          <p class="text-gray-700">Current security concerns requiring attention</p>
+        </div>
+        <div class="bg-yellow-100 border-4 border-yellow-500 rounded-xl p-6">
+          <div class="w-6 h-6 bg-yellow-500 rounded-full mb-4"></div>
+          <h4 class="font-bold text-xl mb-2 text-black">Monitoring</h4>
+          <p class="text-gray-700">Areas under enhanced surveillance</p>
+        </div>
+        <div class="bg-green-100 border-4 border-green-500 rounded-xl p-6">
+          <div class="w-6 h-6 bg-green-500 rounded-full mb-4"></div>
+          <h4 class="font-bold text-xl mb-2 text-black">Resolved</h4>
+          <p class="text-gray-700">Successfully handled situations</p>
+        </div>
+      </div>
+
+      <div class="bg-black rounded-xl p-8 text-white">
+        <h3 class="text-2xl font-black mb-6 text-yellow-400">Patrol Zones</h3>
+        <div class="grid md:grid-cols-2 gap-4">
+          <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-yellow-400">
+            <h4 class="font-bold text-lg mb-2 text-yellow-400">Zone A - Central</h4>
+            <p class="text-gray-400">Main Road, 5th Ave, Park Street</p>
+            <p class="text-sm text-green-400 mt-2">• Patrol Active (18:00 - 06:00)</p>
+          </div>
+          <div class="bg-gray-900 p-6 rounded-lg border-l-4 border-yellow-400">
+            <h4 class="font-bold text-lg mb-2 text-yellow-400">Zone B - Eastern</h4>
+            <p class="text-gray-400">Eastern Block, Forest Edge</p>
+            <p class="text-sm text-green-400 mt-2">• Patrol Active (20:00 - 04:00)</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Businesses Page -->
+    <div id="page-businesses" class="page-content space-y-8 hidden">
+      <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-8 shadow-xl">
+        <h2 class="text-4xl font-black text-black mb-2">Local Business Network</h2>
+        <p class="text-black text-lg font-semibold">Support businesses that support our community</p>
+      </div>
+
+      <div class="bg-yellow-50 border-4 border-yellow-400 rounded-xl p-8">
+        <h3 class="text-2xl font-bold mb-4 text-black">Add Your Business</h3>
+        <p class="text-gray-700 mb-6">Join our network of community-minded businesses!</p>
+        <form id="business-form" class="space-y-4">
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <label class="block text-black font-bold mb-2">Business Name *</label>
+              <input type="text" id="business-name" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" placeholder="Your Business Name" required>
+            </div>
+            <div>
+              <label class="block text-black font-bold mb-2">Category *</label>
+              <select id="business-category" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" required>
+                <option value="">Select category...</option>
+                <option>Food & Beverage</option>
+                <option>Retail</option>
+                <option>Healthcare</option>
+                <option>Hardware</option>
+                <option>Professional Services</option>
+                <option>Other</option>
+              </select>
+            </div>
+            <div>
+              <label class="block text-black font-bold mb-2">Phone</label>
+              <input type="tel" id="business-phone" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" placeholder="021-555-0100">
+            </div>
+            <div>
+              <label class="block text-black font-bold mb-2">Email</label>
+              <input type="email" id="business-email" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" placeholder="business@example.com">
+            </div>
+          </div>
+          <button type="submit" class="bg-black text-yellow-400 px-8 py-3 rounded-lg font-bold hover:bg-gray-900 transition-all">Submit Business</button>
+        </form>
+      </div>
+
+      <div class="bg-white rounded-xl p-8 shadow-lg border-4 border-yellow-400">
+        <h3 class="text-3xl font-black mb-6 text-black">Member Businesses</h3>
+        <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-6" id="business-list"><!-- populated by JS --></div>
+      </div>
+
+      <div class="bg-black rounded-xl p-8 text-white">
+        <h3 class="text-2xl font-black mb-4 text-yellow-400">Benefits of Joining</h3>
+        <ul class="space-y-3">
+          <li class="flex items-start"><span class="text-yellow-400 mr-2">→</span><span>Featured listing on our community website and app</span></li>
+          <li class="flex items-start"><span class="text-yellow-400 mr-2">→</span><span>Direct communication channel with community members</span></li>
+          <li class="flex items-start"><span class="text-yellow-400 mr-2">→</span><span>Priority assistance during security incidents</span></li>
+          <li class="flex items-start"><span class="text-yellow-400 mr-2">→</span><span>Participation in community safety initiatives</span></li>
+        </ul>
+      </div>
+    </div>
+
+    <!-- Events Page -->
+    <div id="page-events" class="page-content space-y-8 hidden">
+      <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-8 shadow-xl">
+        <h2 class="text-4xl font-black text-black mb-2">Events & Patrols</h2>
+        <p class="text-black text-lg font-semibold">Join us in keeping Southfield safe</p>
+      </div>
+
+      <div class="bg-black rounded-xl p-8 text-white">
+        <h3 class="text-3xl font-black mb-6 text-yellow-400">Upcoming Events</h3>
+        <div class="space-y-6">
+          <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-yellow-400">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h4 class="font-bold text-2xl text-yellow-400 mb-2">Community Safety Patrol</h4>
+                <p class="text-gray-400">Saturday, October 25, 2025</p>
+              </div>
+              <svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+              </svg>
+            </div>
+            <p class="text-white mb-4">Join our visible safety patrol through Lower Tokai and Tokai Forest. All residents, families, and well-behaved dogs welcome!</p>
+            <div class="flex gap-2 flex-wrap">
+              <span class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">Family Friendly</span>
+              <span class="bg-yellow-400 text-black px-3 py-1 rounded-full text-sm font-bold">Pets Welcome</span>
+            </div>
+          </div>
+
+          <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-yellow-400">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h4 class="font-bold text-2xl text-yellow-400 mb-2">Monthly Community Meeting</h4>
+                <p class="text-gray-400">First Wednesday of Every Month - 19:00</p>
+              </div>
+              <svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 20h5v-2a3 3 0 00-5.356-1.857M17 20H7m10 0v-2c0-.656-.126-1.283-.356-1.857M7 20H2v-2a3 3 0 015.356-1.857M7 20v-2c0-.656.126-1.283.356-1.857m0 0a5.002 5.002 0 019.288 0M15 7a3 3 0 11-6 0 3 3 0 016 0zm6 3a2 2 0 11-4 0 2 2 0 014 0zM7 10a2 2 0 11-4 0 2 2 0 014 0z"/>
+              </svg>
+            </div>
+            <p class="text-white mb-4">Discuss community safety concerns, review statistics, and plan upcoming initiatives.</p>
+          </div>
+
+          <div class="bg-gray-900 rounded-lg p-6 border-l-4 border-yellow-400">
+            <div class="flex items-start justify-between mb-4">
+              <div>
+                <h4 class="font-bold text-2xl text-yellow-400 mb-2">Self-Defense Workshop</h4>
+                <p class="text-gray-400">Saturday, November 8, 2025 - 10:00</p>
+              </div>
+              <svg class="w-12 h-12 text-yellow-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <p class="text-white mb-4">Learn basic self-defense techniques from certified instructors. Open to all ages 16+.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Contact Page -->
+    <div id="page-contact" class="page-content space-y-8 hidden">
+      <div class="bg-gradient-to-r from-yellow-400 to-yellow-500 rounded-xl p-8 shadow-xl">
+        <h2 class="text-4xl font-black text-black mb-2">Contact Us</h2>
+        <p class="text-black text-lg font-semibold">Get in touch with the Southfield Watch team</p>
+      </div>
+
+      <div class="grid md:grid-cols-2 gap-8">
+        <div class="bg-black rounded-xl p-8 text-white">
+          <h3 class="text-2xl font-black mb-6 text-yellow-400">Emergency Contacts</h3>
+          <div class="space-y-4">
+            <div class="bg-red-500 rounded-lg p-4">
+              <h4 class="font-bold text-xl mb-2">Emergency Services</h4>
+              <p class="text-2xl font-black">10111</p>
+            </div>
+            <div class="bg-gray-900 rounded-lg p-4 border-2 border-yellow-400">
+              <h4 class="font-bold text-lg mb-2 text-yellow-400">Southfield Watch Patrol</h4>
+              <p class="text-xl font-bold">021-555-SAFE</p>
+            </div>
+            <div class="bg-gray-900 rounded-lg p-4 border-2 border-yellow-400">
+              <h4 class="font-bold text-lg mb-2 text-yellow-400">Local SAPS</h4>
+              <p class="text-xl font-bold">021-555-0199</p>
+            </div>
+          </div>
+        </div>
+
+        <div class="bg-white rounded-xl p-8 shadow-lg border-4 border-yellow-400">
+          <h3 class="text-2xl font-black mb-6 text-black">Send us a Message</h3>
+          <form id="contact-form" class="space-y-4">
+            <div>
+              <label class="block text-black font-bold mb-2">Name</label>
+              <input type="text" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" placeholder="Your name">
+            </div>
+            <div>
+              <label class="block text-black font-bold mb-2">Email</label>
+              <input type="email" class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none" placeholder="your@email.com">
+            </div>
+            <div>
+              <label class="block text-black font-bold mb-2">Message</label>
+              <textarea class="w-full p-3 border-2 border-gray-300 rounded-lg focus:border-yellow-400 focus:outline-none h-32" placeholder="How can we help?"></textarea>
+            </div>
+            <button type="submit" class="bg-black text-yellow-400 px-8 py-3 rounded-lg font-bold hover:bg-gray-900 transition-all w-full">Send Message</button>
+          </form>
+        </div>
+      </div>
+
+      <div class="bg-yellow-50 border-4 border-yellow-400 rounded-xl p-8">
+        <h3 class="text-2xl font-black mb-6 text-black">Office Hours</h3>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div>
+            <h4 class="font-bold text-lg mb-2">Office</h4>
+            <p class="text-gray-700">Monday - Friday: 09:00 - 17:00</p>
+            <p class="text-gray-700">Saturday: 09:00 - 13:00</p>
+            <p class="text-gray-700">Sunday: Closed</p>
+          </div>
+          <div>
+            <h4 class="font-bold text-lg mb-2">Patrol</h4>
+            <p class="text-gray-700">24/7 Emergency Response</p>
+            <p class="text-gray-700">Evening Patrols: 18:00 - 06:00</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="bg-black rounded-xl p-8 text-white">
+        <h3 class="text-2xl font-black mb-6 text-yellow-400">Follow Us</h3>
+        <p class="mb-4">Stay updated on community safety news and events</p>
+        <div class="flex gap-4 flex-wrap">
+          <button class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-all">Facebook</button>
+          <button class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-all">WhatsApp Group</button>
+          <button class="bg-yellow-400 text-black px-6 py-3 rounded-lg font-bold hover:bg-yellow-300 transition-all">Newsletter</button>
+        </div>
+      </div>
+    </div>
+  </main>
+
+  <!-- Footer -->
+  <footer class="bg-black text-yellow-400 mt-16 border-t-4 border-yellow-400">
+    <div class="max-w-7xl mx-auto px-4 py-8">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h3 class="font-black text-xl mb-4">SOUTHFIELD WATCH</h3>
+          <p class="text-gray-400">Keeping our community safe, together.</p>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Quick Links</h4>
+          <ul class="space-y-2 text-gray-400">
+            <li><button onclick="showPage('home')" class="hover:text-yellow-400">Home</button></li>
+            <li><button onclick="showPage('reports')" class="hover:text-yellow-400">Report Incident</button></li>
+            <li><button onclick="showPage('contact')" class="hover:text-yellow-400">Contact</button></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="font-bold mb-4">Emergency</h4>
+          <p class="text-2xl font-black">10111</p>
+          <p class="text-sm text-gray-400">Available 24/7</p>
+        </div>
+      </div>
+      <div class="text-center text-gray-400 text-sm border-t border-gray-800 pt-6">
+        <p>&copy; 2025 Southfield Neighbourhood Watch. All rights reserved.</p>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Script -->
+  <script>
+    // Data storage
+    let reports = [
+      { id: 1, type: 'Suspicious Activity', location: 'Main Rd & 5th Ave', time: '2 hours ago', status: 'Active' },
+      { id: 2, type: 'Vehicle Break-in', location: 'Park Street', time: '5 hours ago', status: 'Resolved' },
+      { id: 3, type: 'Power Outage', location: 'Eastern Block', time: '1 day ago', status: 'Monitoring' }
+    ];
+
+    let businesses = [
+      { id: 1, name: 'Southfield Hardware', category: 'Hardware', phone: '021-555-0101', member: true },
+      { id: 2, name: 'Cafe on Main', category: 'Food & Beverage', phone: '021-555-0102', member: true },
+      { id: 3, name: 'Green Pharmacy', category: 'Healthcare', phone: '021-555-0103', member: false }
+    ];
+
+    // Navigation helpers
+    function showPage(pageId) {
+      document.querySelectorAll('.page-content').forEach(page => page.classList.add('hidden'));
+      const target = document.getElementById('page-' + pageId);
+      if (!target) return;
+      target.classList.remove('hidden');
+
+      // Reset nav styling for desktop buttons
+      document.querySelectorAll('.nav-btn').forEach(btn => {
+        btn.classList.remove('bg-yellow-400','text-black');
+        btn.classList.add('text-yellow-400','hover:bg-gray-900');
+      });
+
+      // Highlight active desktop button(s)
+      const activeButtons = document.querySelectorAll('[onclick="showPage(\\'' + pageId + '\\')"], [onclick="showPage(\'' + pageId + '\')"]');
+      activeButtons.forEach(btn => {
+        if (btn.classList.contains('nav-btn')) {
+          btn.classList.add('bg-yellow-400','text-black');
+          btn.classList.remove('text-yellow-400','hover:bg-gray-900');
+        }
+      });
+
+      // Update content depending on page
+      if (pageId === 'home') {
+        renderRecentReports();
+      } else if (pageId === 'reports') {
+        renderAllReports();
+      } else if (pageId === 'businesses') {
+        renderBusinesses();
+      }
+
+      // Scroll to top
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
+
+    function toggleMobileMenu() {
+      const mobileNav = document.getElementById('mobile-nav');
+      mobileNav.classList.toggle('hidden');
+    }
+
+    // Render functions
+    function getStatusClass(status) {
+      if (status === 'Active') return 'bg-red-500 text-white';
+      if (status === 'Resolved') return 'bg-green-500 text-white';
+      return 'bg-yellow-400 text-black';
+    }
+
+    function renderRecentReports() {
+      const container = document.getElementById('recent-reports');
+      if (!container) return;
+      container.innerHTML = reports.slice(0,3).map(report => `
+        <div class="bg-gray-900 rounded-lg p-4 border-l-4 border-yellow-400">
+          <div class="flex justify-between items-start">
+            <div>
+              <h4 class="font-bold text-lg text-yellow-400">${report.type}</h4>
+              <p class="text-gray-400">📍 ${report.location}</p>
+            </div>
+            <span class="text-sm px-3 py-1 rounded-full font-bold ${getStatusClass(report.status)}">${report.status}</span>
+          </div>
+          <p class="text-sm text-gray-500 mt-2">🕒 ${report.time}</p>
+        </div>
+      `).join('');
+      const rc = document.getElementById('report-count');
+      if (rc) rc.textContent = reports.length;
+    }
+
+    function renderAllReports() {
+      const container = document.getElementById('all-reports');
+      if (!container) return;
+      container.innerHTML = reports.map(report => `
+        <div class="bg-gray-900 rounded-lg p-6 border-2 border-yellow-400 hover:border-yellow-300 transition-all">
+          <div class="flex justify-between items-start mb-4">
+            <div>
+              <h4 class="font-bold text-xl text-yellow-400">${report.type}</h4>
+              <p class="text-gray-400 mt-2">📍 ${report.location}</p>
+            </div>
+            <span class="px-4 py-2 rounded-full font-bold text-sm ${getStatusClass(report.status)}">${report.status}</span>
+          </div>
+          <p class="text-gray-500">🕒 ${report.time}</p>
+        </div>
+      `).join('');
+    }
+
+    function renderBusinesses() {
+      const container = document.getElementById('business-list');
+      if (!container) return;
+      container.innerHTML = businesses.map(business => `
+        <div class="${business.member ? 'bg-black text-yellow-400 border-yellow-400' : 'bg-gray-100 text-black border-gray-300'} rounded-lg p-6 border-4">
+          <div class="flex items-start justify-between mb-4">
+            <svg class="w-10 h-10 ${business.member ? 'text-yellow-400' : 'text-gray-600'}" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+            ${business.member ? '<span class="bg-yellow-400 text-black text-xs px-2 py-1 rounded-full font-bold">MEMBER</span>' : ''}
+          </div>
+          <h4 class="font-bold text-xl mb-2">${business.name}</h4>
+          <p class="text-sm mb-4 ${business.member ? 'text-yellow-300' : 'text-gray-600'}">${business.category}</p>
+          <p class="text-sm ${business.member ? 'text-yellow-200' : 'text-gray-700'}">📞 ${business.phone}</p>
+        </div>
+      `).join('');
+    }
+
+    // Form handlers (attach after DOM ready)
+    document.addEventListener('DOMContentLoaded', () => {
+      const reportForm = document.getElementById('report-form');
+      if (reportForm) {
+        reportForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const type = document.getElementById('report-type').value;
+          const location = document.getElementById('report-location').value;
+          const description = document.getElementById('report-description').value;
+          const newReport = {
+            id: reports.length + 1,
+            type: type || 'Other',
+            location: location || 'Unknown',
+            time: 'Just now',
+            status: 'Active',
+            description: description || ''
+          };
+          reports.unshift(newReport);
+          alert('Report submitted successfully! Our team will review it shortly.');
+          reportForm.reset();
+          renderAllReports();
+          renderRecentReports();
+          showPage('reports');
+        });
+      }
+
+      const businessForm = document.getElementById('business-form');
+      if (businessForm) {
+        businessForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          const name = document.getElementById('business-name').value;
+          const category = document.getElementById('business-category').value;
+          const phone = document.getElementById('business-phone').value;
+          const email = document.getElementById('business-email').value;
+          const newBusiness = {
+            id: businesses.length + 1,
+            name: name || 'Unnamed',
+            category: category || 'Other',
+            phone: phone || '',
+            email: email || '',
+            member: false
+          };
+          businesses.push(newBusiness);
+          alert('Business submitted! We will contact them about joining our network.');
+          businessForm.reset();
+          renderBusinesses();
+          showPage('businesses');
+        });
+      }
+
+      const contactForm = document.getElementById('contact-form');
+      if (contactForm) {
+        contactForm.addEventListener('submit', function(e) {
+          e.preventDefault();
+          alert('Thank you for your message! We will get back to you soon.');
+          contactForm.reset();
+          showPage('contact');
+        });
+      }
+
+      // Initialize views
+      renderRecentReports();
+      renderAllReports();
+      renderBusinesses();
+
+      // Start on home
+      showPage('home');
+    });
+  </script>
 </body>
 </html>
