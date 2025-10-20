@@ -1,100 +1,769 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Welcome to Pure360</title>
-    <link rel="icon" href="Assets/Pure%20(1).png" type="image/png">
-    <style>
-        :root {
-            --main-blue: #29a8c2;
-            --main-dark: #32444e;
-            --main-light: #f8fafd;
-            --main-white: #ffffff;
-        }
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: var(--main-light);
-            color: var(--main-dark);
-        }
-        header {
-            background-color: var(--main-blue);
-            color: var(--main-white);
-            padding: 1rem 0;
-            text-align: center;
-        }
-        header img {
-            height: 80px;
-            margin-bottom: 0.5rem;
-        }
-        nav ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            display: flex;
-            justify-content: center;
-            gap: 1.5rem;
-        }
-        nav ul li a {
-            color: var(--main-white);
-            text-decoration: none;
-            font-weight: bold;
-        }
-        nav ul li a:hover {
-            text-decoration: underline;
-        }
-        .hero {
-            text-align: center;
-            padding: 2rem 1rem;
-            background-color: var(--main-blue);
-            color: var(--main-white);
-        }
-        .hero h1 {
-            font-size: 2.5rem;
-            margin-bottom: 1rem;
-        }
-        .hero p {
-            font-size: 1.2rem;
-        }
-        footer {
-            background-color: var(--main-dark);
-            color: var(--main-white);
-            padding: 2rem 0;
-            text-align: center;
-        }
-        footer a {
-            color: var(--main-blue);
-            text-decoration: none;
-        }
-        footer a:hover {
-            text-decoration: underline;
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>House of Miraal — Custom Muslim Wear Tailoring</title>
+
+  <!-- Tailwind CDN (keeps original layout utilities) -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Fonts chosen to match the attached logo: elegant serif + script + clean sans -->
+  <link href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Playfair+Display:wght@400;700;900&family=Lato:wght@300;400;700&display=swap" rel="stylesheet">
+
+  <style>
+    /* Brand colors extracted from your logo */
+    :root{
+      --brand-dark: #2b2a29;       /* deep charcoal for large HM letters */
+      --brand-accent: #bfa38f;     /* warm taupe/beige used in script text */
+      --brand-rich: #5b463a;       /* warm brownish used for deep accents */
+      --bg: #f7f6f6;
+    }
+
+    /* Base typography */
+    body {
+      font-family: 'Lato', system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial;
+      background: var(--bg);
+      color: var(--brand-dark);
+      -webkit-font-smoothing:antialiased;
+      -moz-osx-font-smoothing:grayscale;
+    }
+
+    h1,h2,h3,h4,h5,h6 { font-family: "Playfair Display", serif; color: var(--brand-dark); }
+    .logo-script { font-family: "Great Vibes", cursive; color: var(--brand-accent); letter-spacing: 0.06em; }
+
+    /* Header branding */
+    .brand-mark {
+      color: var(--brand-dark);
+      font-weight: 900;
+      letter-spacing: -0.02em;
+      font-size: 2.25rem;
+      line-height: 1;
+      font-family: "Playfair Display", serif;
+    }
+    .brand-text {
+      display:block;
+      line-height: 0.9;
+    }
+    .brand-sub {
+      font-size:0.85rem;
+      color:var(--brand-rich);
+      font-weight:700;
+      letter-spacing:0.35em;
+    }
+
+    /* Hero adjustments to reflect the logo aesthetic */
+    .hero-gradient {
+      background: linear-gradient(180deg, rgba(247,246,246,1) 0%, rgba(255,250,246,1) 45%, rgba(241,236,232,1) 100%);
+    }
+    .hero-overlay {
+      pointer-events:none;
+      position:absolute;
+      inset: -10% 0 auto 0;
+      height:60%;
+      background: linear-gradient(180deg, rgba(43,40,39,0.06), rgba(43,40,39,0.02));
+      transform: rotate(-2deg);
+      filter: blur(8px);
+    }
+
+    /* Subtle large HM background as in logo */
+    .hero-hm {
+      font-size: clamp(7rem, 12vw, 16rem);
+      color: rgba(43,40,39,0.12);
+      font-family: "Playfair Display", serif;
+      font-weight:900;
+      line-height:0.8;
+      letter-spacing: -0.02em;
+      user-select: none;
+    }
+
+    /* Card styles and interactions */
+    .measurement-card { transition: transform .35s ease, box-shadow .35s ease; }
+    .measurement-card:hover { transform: translateY(-8px); box-shadow: 0 18px 40px rgba(43,40,39,0.08); }
+
+    /* Active nav link */
+    .nav-active { color: var(--brand-rich) !important; font-weight: 800; border-bottom: 3px solid var(--brand-accent); padding-bottom: 0.4rem; }
+
+    /* Modal / lightbox */
+    .modal-backdrop { background: rgba(0,0,0,0.5); }
+    .hidden { display: none !important; }
+
+    /* Tiny form focus ring matching brand */
+    input:focus, select:focus, textarea:focus {
+      outline: 3px solid rgba(191,163,143,0.12);
+      box-shadow: 0 0 0 4px rgba(191,163,143,0.06);
+    }
+
+    /* Responsive tweaks */
+    @media (max-width: 768px){
+      .brand-mark { font-size: 1.5rem; }
+      .hero-hm { font-size: clamp(5rem, 22vw, 9rem); }
+    }
+  </style>
 </head>
-<body>
-    <header>
-        <img src="Assets/Pure%20(1).png" alt="Pure360 Logo">
-        <h1>Pure360 Cleaning Services</h1>
-        <nav>
-            <ul>
-                <li><a href="home-cleaning.html">Home Cleaning</a></li>
-                <li><a href="deep-cleaning.html">Deep Cleaning</a></li>
-                <li><a href="window-cleaning.html">Window Cleaning</a></li>
-                <li><a href="pool-cleaning.html">Pool Cleaning</a></li>
-                <li><a href="gardening.html">Gardening</a></li>
-                <li><a href="bin-cleaning.html">Bin Cleaning</a></li>
-                <li><a href="car-wash.html">Car Wash</a></li>
-            </ul>
-        </nav>
-    </header>
-    <section class="hero">
-        <h1>Welcome to Pure360</h1>
-        <p>Providing trusted and affordable cleaning services tailored to your needs.</p>
+<body class="antialiased">
+
+  <!-- HEADER -->
+  <header class="bg-white shadow sticky top-0 z-50">
+    <div class="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
+      <div class="flex items-center gap-4">
+        <!-- If you have uploaded the provided image to Assets, it can be used here.
+             For the moment we render a typographic brand that matches the provided logo. -->
+        <div class="flex items-start">
+          <div class="brand-mark">H<span class="ml-1">M</span></div>
+          <div class="ml-3">
+            <span class="brand-sub">HOUSE OF</span>
+            <div class="brand-text text-2xl logo-script">Miraal</div>
+          </div>
+        </div>
+      </div>
+
+      <nav class="hidden md:flex items-center gap-6 text-base">
+        <button class="nav-link text-sm text-gray-700 hover:text-brand-rich transition" data-target="home">Home</button>
+        <button class="nav-link text-sm text-gray-700 hover:text-brand-rich transition" data-target="collection">Collection</button>
+        <button class="nav-link text-sm text-gray-700 hover:text-brand-rich transition" data-target="custom-order">Custom Order</button>
+        <button class="nav-link text-sm text-gray-700 hover:text-brand-rich transition" data-target="measurements">How to Measure</button>
+        <button class="nav-link text-sm text-gray-700 hover:text-brand-rich transition" data-target="about">About</button>
+        <button class="nav-cta bg-[var(--brand-dark)] text-white px-4 py-2 rounded-md text-sm hover:opacity-95 transition" data-target="contact">Contact</button>
+      </nav>
+
+      <!-- Mobile menu toggle -->
+      <div class="md:hidden">
+        <button id="mobile-toggle" aria-label="Toggle menu" class="p-2 text-[var(--brand-dark)]">
+          <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Mobile menu items -->
+    <div id="mobile-menu" class="hidden border-t">
+      <div class="px-4 py-3 space-y-1">
+        <button class="w-full text-left py-2 nav-link-mobile" data-target="home">Home</button>
+        <button class="w-full text-left py-2 nav-link-mobile" data-target="collection">Collection</button>
+        <button class="w-full text-left py-2 nav-link-mobile" data-target="custom-order">Custom Order</button>
+        <button class="w-full text-left py-2 nav-link-mobile" data-target="measurements">How to Measure</button>
+        <button class="w-full text-left py-2 nav-link-mobile" data-target="about">About</button>
+        <button class="w-full text-left py-2 nav-link-mobile" data-target="contact">Contact</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- MAIN: Structured like original but with theme refinements and interactive features -->
+  <main id="app" class="overflow-x-hidden">
+
+    <!-- HOME PAGE -->
+    <section id="page-home" class="page-content">
+      <div class="hero-gradient relative min-h-[76vh] flex items-center justify-center">
+        <div class="hero-overlay"></div>
+
+        <div class="max-w-7xl mx-auto px-6 flex items-center gap-12">
+          <!-- Huge faint HM as background -->
+          <div class="hidden sm:block flex-1">
+            <div class="hero-hm select-none">HM</div>
+          </div>
+
+          <div class="flex-1 z-10">
+            <div class="max-w-2xl">
+              <div class="mb-6">
+                <div class="text-sm text-[var(--brand-rich)] font-semibold uppercase tracking-wider">Bespoke • Modest • Elegant</div>
+              </div>
+              <h1 class="text-4xl md:text-5xl font-black leading-tight mb-4">House of Miraal</h1>
+              <div class="logo-script text-2xl mb-6">Exquisite custom Muslim wear, tailored to perfection</div>
+              <p class="text-gray-700 mb-8">We combine traditional craftsmanship and modern tailoring techniques to deliver garments that fit beautifully and last a lifetime.</p>
+
+              <div class="flex gap-4 flex-wrap">
+                <button data-target="collection" class="btn-primary bg-[var(--brand-dark)] text-white px-6 py-3 rounded-md hover:opacity-95 transition">View Collection</button>
+                <button data-target="custom-order" class="btn-secondary border-[var(--brand-accent)] text-[var(--brand-dark)] px-6 py-3 rounded-md hover:bg-[var(--brand-accent)] hover:text-white transition">Start Custom Order</button>
+                <a id="gallery-open" class="inline-block px-4 py-3 text-sm text-[var(--brand-rich)] underline">View Lookbook →</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Features -->
+      <section class="py-20 bg-white">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-3xl md:text-4xl font-black text-[var(--brand-dark)] text-center mb-12">Why Choose House of Miraal</h2>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <article class="measurement-card bg-[var(--bg)] p-8 rounded-lg">
+              <div class="w-16 h-16 bg-[var(--brand-dark)] rounded-full flex items-center justify-center text-white mb-6">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--brand-dark)] mb-2">Perfect Fit Guaranteed</h3>
+              <p class="text-gray-600">Measurements are treated with precision — tailored to your unique shape for the most flattering fit.</p>
+            </article>
+
+            <article class="measurement-card bg-[var(--bg)] p-8 rounded-lg">
+              <div class="w-16 h-16 bg-[var(--brand-accent)] rounded-full flex items-center justify-center text-white mb-6">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v4a1 1 0 001 1h3"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--brand-dark)] mb-2">Premium Fabrics</h3>
+              <p class="text-gray-600">Luxurious fabric options chosen for comfort, drape and longevity.</p>
+            </article>
+
+            <article class="measurement-card bg-[var(--bg)] p-8 rounded-lg">
+              <div class="w-16 h-16 bg-[var(--brand-rich)] rounded-full flex items-center justify-center text-white mb-6">
+                <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 8v4l3 3"/></svg>
+              </div>
+              <h3 class="text-xl font-bold text-[var(--brand-dark)] mb-2">Expert Craftsmanship</h3>
+              <p class="text-gray-600">Time-honored skills combined with modern precision to create garments you'll cherish.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- How it works -->
+      <section class="py-16 bg-[var(--bg)]">
+        <div class="max-w-6xl mx-auto px-6">
+          <h2 class="text-3xl md:text-4xl text-center font-black mb-10">How it Works</h2>
+          <div class="grid md:grid-cols-4 gap-6">
+            <div class="text-center p-6 bg-white rounded-lg">
+              <div class="w-12 h-12 bg-[var(--brand-dark)] text-white rounded-full flex items-center justify-center mx-auto mb-4">1</div>
+              <h4 class="font-semibold mb-2">Choose Style</h4>
+              <p class="text-sm text-gray-600">Select a garment from our curated collection.</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg">
+              <div class="w-12 h-12 bg-[var(--brand-accent)] text-white rounded-full flex items-center justify-center mx-auto mb-4">2</div>
+              <h4 class="font-semibold mb-2">Provide Measurements</h4>
+              <p class="text-sm text-gray-600">Follow our guided measurement form for precise sizing.</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg">
+              <div class="w-12 h-12 bg-[var(--brand-rich)] text-white rounded-full flex items-center justify-center mx-auto mb-4">3</div>
+              <h4 class="font-semibold mb-2">Customize Details</h4>
+              <p class="text-sm text-gray-600">Choose fabric, color and finishing touches.</p>
+            </div>
+            <div class="text-center p-6 bg-white rounded-lg">
+              <div class="w-12 h-12 bg-[var(--brand-dark)] text-white rounded-full flex items-center justify-center mx-auto mb-4">4</div>
+              <h4 class="font-semibold mb-2">Receive Your Garment</h4>
+              <p class="text-sm text-gray-600">Delivered to your door, or collect from our studio.</p>
+            </div>
+          </div>
+        </div>
+      </section>
     </section>
-    <footer>
-        <p>&copy; 2025 Pure360 Cleaning Services | <a href="contact.html">Contact Us</a></p>
-    </footer>
+
+    <!-- COLLECTION PAGE -->
+    <section id="page-collection" class="page-content hidden py-12">
+      <div class="max-w-7xl mx-auto px-6">
+        <div class="flex items-center justify-between mb-8">
+          <h1 class="text-3xl font-black text-[var(--brand-dark)]">Our Collection</h1>
+
+          <div class="flex gap-3 items-center">
+            <label class="text-sm text-gray-600">Filter:</label>
+            <select id="filter-category" class="p-2 border rounded text-sm">
+              <option value="all">All</option>
+              <option value="men">Men</option>
+              <option value="women">Women</option>
+              <option value="accessories">Accessories</option>
+            </select>
+          </div>
+        </div>
+
+        <div id="collection-grid" class="grid md:grid-cols-3 gap-8">
+          <!-- Cards generated by JS for easy customization and lightbox behavior -->
+        </div>
+      </div>
+    </section>
+
+    <!-- CUSTOM ORDER PAGE -->
+    <section id="page-custom-order" class="page-content hidden py-12">
+      <div class="max-w-4xl mx-auto px-6">
+        <h1 class="text-3xl font-black text-[var(--brand-dark)] mb-6">Custom Order</h1>
+
+        <div class="bg-white rounded-xl shadow p-8">
+          <form id="custom-order-form" class="space-y-6">
+            <div>
+              <label class="block text-sm font-semibold mb-2">Garment Type</label>
+              <select id="garment-type" class="w-full p-3 border rounded" required>
+                <option value="">Choose garment...</option>
+                <optgroup label="Men's">
+                  <option value="thobe">Thobe / Jubba</option>
+                  <option value="kurta">Kurta Shalwar</option>
+                  <option value="bisht">Bisht</option>
+                </optgroup>
+                <optgroup label="Women's">
+                  <option value="abaya">Abaya</option>
+                  <option value="jilbab">Jilbab</option>
+                  <option value="kaftan">Kaftan</option>
+                </optgroup>
+              </select>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold mb-2">Height (cm)</label>
+                <input id="inp-height" type="number" step="0.1" class="w-full p-3 border rounded" placeholder="170" required>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2">Weight (kg)</label>
+                <input id="inp-weight" type="number" step="0.1" class="w-full p-3 border rounded" placeholder="70">
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2">Chest / Bust (cm)</label>
+                <input id="inp-chest" type="number" step="0.1" class="w-full p-3 border rounded" placeholder="95" required>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2">Waist (cm)</label>
+                <input id="inp-waist" type="number" step="0.1" class="w-full p-3 border rounded" placeholder="80" required>
+              </div>
+            </div>
+
+            <div class="grid md:grid-cols-2 gap-4">
+              <div>
+                <label class="block text-sm font-semibold mb-2">Fabric</label>
+                <select id="inp-fabric" class="w-full p-3 border rounded" required>
+                  <option value="">Choose fabric...</option>
+                  <option>Premium Cotton</option>
+                  <option>Linen Blend</option>
+                  <option>Silk</option>
+                  <option>Wool Blend</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-sm font-semibold mb-2">Color</label>
+                <select id="inp-color" class="w-full p-3 border rounded" required>
+                  <option value="">Choose color...</option>
+                  <option>White</option>
+                  <option>Black</option>
+                  <option>Beige</option>
+                  <option>Navy</option>
+                </select>
+              </div>
+            </div>
+
+            <div>
+              <label class="block text-sm font-semibold mb-2">Additional Details</label>
+              <textarea id="inp-notes" class="w-full p-3 border rounded h-28" placeholder="Any special requests or embroidery notes..."></textarea>
+            </div>
+
+            <div class="flex items-center gap-4">
+              <button type="submit" class="bg-[var(--brand-dark)] text-white px-6 py-3 rounded">Submit Order</button>
+              <button id="order-preview" type="button" class="px-4 py-3 border rounded text-sm">Preview Summary</button>
+            </div>
+          </form>
+        </div>
+      </div>
+    </section>
+
+    <!-- MEASUREMENTS GUIDE PAGE -->
+    <section id="page-measurements" class="page-content hidden py-12">
+      <div class="max-w-6xl mx-auto px-6">
+        <h1 class="text-3xl font-black mb-6">How to Measure</h1>
+        <div class="grid md:grid-cols-2 gap-6">
+          <div class="bg-white p-6 rounded">
+            <h3 class="font-semibold mb-3">Top Tips</h3>
+            <ul class="text-gray-700 space-y-2">
+              <li>• Use a flexible tape and wear light clothing.</li>
+              <li>• Ask someone to assist for more accurate measurements.</li>
+              <li>• Keep the tape snug but not tight.</li>
+            </ul>
+            <div class="mt-6">
+              <button id="open-measure-helper" class="px-4 py-2 bg-[var(--brand-accent)] rounded text-white">Open Visual Guide</button>
+            </div>
+          </div>
+          <div class="bg-white p-6 rounded">
+            <h3 class="font-semibold mb-3">Measurement Checklist</h3>
+            <ol class="list-decimal list-inside text-gray-700 space-y-2">
+              <li>Height</li>
+              <li>Chest / Bust</li>
+              <li>Waist</li>
+              <li>Hip</li>
+              <li>Shoulder width</li>
+              <li>Sleeve length</li>
+              <li>Garment length</li>
+            </ol>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT -->
+    <section id="page-about" class="page-content hidden py-12">
+      <div class="max-w-5xl mx-auto px-6">
+        <h1 class="text-3xl font-black mb-4">About House of Miraal</h1>
+        <p class="text-gray-700 mb-6">House of Miraal blends traditional tailoring and modern design. Our mission is to create timeless garments that make you feel confident and comfortable.</p>
+
+        <div class="grid md:grid-cols-3 gap-6">
+          <div class="bg-white p-6 rounded">
+            <h4 class="font-bold mb-2">Custom Made</h4>
+            <p class="text-gray-700">Every piece is tailored to your measurements.</p>
+          </div>
+          <div class="bg-white p-6 rounded">
+            <h4 class="font-bold mb-2">Premium Fabrics</h4>
+            <p class="text-gray-700">Selected from trusted mills for color and drape.</p>
+          </div>
+          <div class="bg-white p-6 rounded">
+            <h4 class="font-bold mb-2">Expert Craftsmanship</h4>
+            <p class="text-gray-700">Master tailors with decades of experience.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- CONTACT -->
+    <section id="page-contact" class="page-content hidden py-12">
+      <div class="max-w-4xl mx-auto px-6">
+        <h1 class="text-3xl font-black mb-4">Contact Us</h1>
+        <div class="grid md:grid-cols-2 gap-6">
+          <form id="contact-form" class="bg-white p-6 rounded space-y-4">
+            <div><label class="block text-sm font-semibold mb-1">Name</label><input required class="w-full p-3 border rounded" /></div>
+            <div><label class="block text-sm font-semibold mb-1">Email</label><input type="email" required class="w-full p-3 border rounded" /></div>
+            <div><label class="block text-sm font-semibold mb-1">Message</label><textarea required class="w-full p-3 border rounded h-28"></textarea></div>
+            <div><button type="submit" class="bg-[var(--brand-dark)] text-white px-6 py-3 rounded">Send Message</button></div>
+          </form>
+
+          <div class="bg-white p-6 rounded">
+            <h4 class="font-bold mb-2">Visit / Call</h4>
+            <p class="text-gray-700 mb-2">📞 0610468405</p>
+            <p class="text-gray-700 mb-2">✉️ info@houseofmiraal.com</p>
+            <p class="text-gray-700">Mon-Sat: 9AM - 6PM</p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- FOOTER -->
+  <footer class="bg-white border-t py-8 mt-12">
+    <div class="max-w-7xl mx-auto px-6 text-center text-sm text-gray-600">
+      <div class="mb-3">
+        <span class="brand-sub mr-2">HOUSE OF</span><span class="logo-script">Miraal</span>
+      </div>
+      <div>© 2025 House of Miraal — Crafted with excellence and care.</div>
+    </div>
+  </footer>
+
+  <!-- LIGHTBOX / MODALS -->
+  <div id="modal-backdrop" class="fixed inset-0 hidden items-center justify-center modal-backdrop z-50">
+    <div id="modal-content" class="bg-white rounded-lg overflow-hidden max-w-3xl w-full shadow-xl">
+      <!-- dynamic -->
+    </div>
+  </div>
+
+  <!-- SCRIPTS: interactive behavior -->
+  <script>
+    /* SPA navigation helpers */
+    const navButtons = document.querySelectorAll('.nav-link, .nav-cta, .nav-link-mobile, .btn-primary, .btn-secondary');
+    function showPageId(pageId){
+      document.querySelectorAll('.page-content').forEach(p => p.classList.add('hidden'));
+      const page = document.getElementById('page-' + pageId);
+      if(page) {
+        page.classList.remove('hidden');
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+      } else {
+        // fallback: if pageId equals 'home' show top section
+        if(pageId === 'home') document.getElementById('page-home').classList.remove('hidden');
+      }
+      // update active nav
+      document.querySelectorAll('nav .nav-link, nav .nav-cta').forEach(el => el.classList.remove('nav-active'));
+      document.querySelectorAll('nav .nav-link').forEach(el => {
+        if(el.dataset.target === pageId) el.classList.add('nav-active');
+      });
+    }
+
+    // wire nav buttons
+    navButtons.forEach(btn => {
+      btn.addEventListener('click', (e) => {
+        const target = btn.dataset.target;
+        if(target){
+          showPageId(target);
+          // close mobile menu if open
+          document.getElementById('mobile-menu').classList.add('hidden');
+        }
+      });
+    });
+
+    // mobile menu toggle
+    document.getElementById('mobile-toggle').addEventListener('click', () => {
+      document.getElementById('mobile-menu').classList.toggle('hidden');
+    });
+
+    // initial page
+    showPageId('home');
+
+    /* COLLECTION: sample data + render + lightbox */
+    const sampleCollection = [
+      { id: 'thobe', title: 'Thobe / Jubba', type: 'men', desc: 'Classic long robe. Available in elegant colors.', img: '' },
+      { id: 'kurta', title: 'Kurta Shalwar', type: 'men', desc: 'Comfortable two-piece outfit with refined details.', img: '' },
+      { id: 'abaya', title: 'Abaya', type: 'women', desc: 'Flowing elegance with modern tailoring.', img: '' },
+      { id: 'jilbab', title: 'Jilbab', type: 'women', desc: 'Modest, comfortable and graceful.', img: '' },
+      { id: 'hijab', title: 'Hijab & Accessories', type: 'accessories', desc: 'Premium hijabs and finishing pieces.', img: '' },
+      { id: 'prayer', title: 'Prayer Garments', type: 'accessories', desc: 'Specialized prayer wear for comfort and respect.', img: '' }
+    ];
+
+    function renderCollection(filter='all'){
+      const grid = document.getElementById('collection-grid');
+      grid.innerHTML = '';
+      const items = sampleCollection.filter(i => filter === 'all' ? true : i.type === filter);
+      items.forEach(it => {
+        const card = document.createElement('article');
+        card.className = 'bg-white rounded-lg overflow-hidden shadow p-0';
+        card.innerHTML = `
+          <div class="h-64 bg-gradient-to-br from-[var(--brand-accent)] to-[var(--bg)] flex items-center justify-center">
+            <div class="text-center">
+              <div class="text-6xl font-black text-[var(--brand-dark)] mb-2">${it.title.split(' ')[0][0] || 'M'}</div>
+              <div class="text-[var(--brand-dark)] font-semibold">${it.title}</div>
+            </div>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-lg text-[var(--brand-dark)] mb-2">${it.title}</h3>
+            <p class="text-gray-600 mb-4">${it.desc}</p>
+            <div class="flex gap-3">
+              <button data-id="${it.id}" class="open-lightbox px-4 py-2 border rounded text-sm">Preview</button>
+              <button data-garment="${it.id}" class="select-garment px-4 py-2 bg-[var(--brand-dark)] text-white rounded text-sm">Customize & Order</button>
+            </div>
+          </div>
+        `;
+        grid.appendChild(card);
+      });
+
+      // wire preview buttons
+      document.querySelectorAll('.open-lightbox').forEach(btn => {
+        btn.addEventListener('click', () => openLightbox(btn.dataset.id));
+      });
+      document.querySelectorAll('.select-garment').forEach(btn => {
+        btn.addEventListener('click', () => {
+          selectGarment(btn.dataset.garment);
+        });
+      });
+    }
+
+    document.getElementById('filter-category').addEventListener('change', (e) => {
+      renderCollection(e.target.value);
+    });
+
+    renderCollection('all');
+
+    /* LIGHTBOX modal */
+    const backdrop = document.getElementById('modal-backdrop');
+    const modalContent = document.getElementById('modal-content');
+
+    function openLightbox(id){
+      const item = sampleCollection.find(i => i.id === id);
+      modalContent.innerHTML = `
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-bold text-xl">${item.title}</h3>
+            <button id="close-modal" class="text-gray-500 hover:text-gray-700">✕</button>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div class="bg-[var(--bg)] rounded p-4 flex items-center justify-center">
+              <div class="text-9xl text-[var(--brand-dark)] font-black">${item.title.split(' ')[0][0]}</div>
+            </div>
+            <div>
+              <p class="text-gray-700 mb-4">${item.desc}</p>
+              <p class="text-sm text-gray-500 mb-4">Choose fabric, color and request custom embroidery or detailing in the order form.</p>
+              <div class="flex gap-3">
+                <button data-garment="${item.id}" class="px-4 py-2 bg-[var(--brand-dark)] text-white rounded select-from-lightbox">Customize & Order</button>
+                <button id="close-modal-2" class="px-4 py-2 border rounded">Close</button>
+              </div>
+            </div>
+          </div>
+        </div>
+      `;
+      backdrop.classList.remove('hidden');
+      backdrop.classList.add('flex');
+
+      // close handlers
+      document.getElementById('close-modal').addEventListener('click', closeModal);
+      document.getElementById('close-modal-2').addEventListener('click', closeModal);
+      document.querySelectorAll('.select-from-lightbox').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const g = btn.dataset.garment;
+          closeModal();
+          selectGarment(g);
+        });
+      });
+    }
+
+    function closeModal(){
+      backdrop.classList.remove('flex');
+      backdrop.classList.add('hidden');
+      modalContent.innerHTML = '';
+    }
+
+    backdrop.addEventListener('click', (e) => {
+      if(e.target === backdrop) closeModal();
+    });
+
+
+    /* Select garment and prefill form */
+    function selectGarment(garmentId){
+      showPageId('custom-order');
+      const sel = document.getElementById('garment-type');
+      if(sel) sel.value = garmentId;
+      // scroll into view nicely
+      document.getElementById('garment-type').scrollIntoView({behavior:'smooth', block:'center'});
+    }
+
+    /* CUSTOM ORDER: preview and submission stored to localStorage */
+    const orderForm = document.getElementById('custom-order-form');
+    const previewBtn = document.getElementById('order-preview');
+
+    previewBtn.addEventListener('click', () => {
+      const summary = collectOrderData(true);
+      if(!summary) return;
+      // show summary in modal
+      modalContent.innerHTML = `
+        <div class="p-6">
+          <div class="flex justify-between items-center mb-4">
+            <h3 class="font-bold text-xl">Order Preview</h3>
+            <button id="close-modal-x" class="text-gray-500 hover:text-gray-700">✕</button>
+          </div>
+          <div class="space-y-3 text-sm">
+            <div><strong>Garment:</strong> ${summary.garment}</div>
+            <div><strong>Height:</strong> ${summary.height} cm</div>
+            <div><strong>Weight:</strong> ${summary.weight || '-'} kg</div>
+            <div><strong>Chest:</strong> ${summary.chest} cm</div>
+            <div><strong>Waist:</strong> ${summary.waist} cm</div>
+            <div><strong>Fabric:</strong> ${summary.fabric}</div>
+            <div><strong>Color:</strong> ${summary.color}</div>
+            <div><strong>Notes:</strong> ${summary.notes || '-'}</div>
+          </div>
+          <div class="mt-6 flex gap-3">
+            <button id="confirm-order" class="px-4 py-2 bg-[var(--brand-dark)] text-white rounded">Confirm & Save</button>
+            <button id="close-order" class="px-4 py-2 border rounded">Close</button>
+          </div>
+        </div>
+      `;
+      backdrop.classList.remove('hidden'); backdrop.classList.add('flex');
+
+      document.getElementById('close-modal-x').addEventListener('click', closeModal);
+      document.getElementById('close-order').addEventListener('click', closeModal);
+      document.getElementById('confirm-order').addEventListener('click', () => {
+        saveOrder(summary);
+        closeModal();
+        alert('Order saved locally. Our team will contact you to confirm and provide a quote.');
+        orderForm.reset();
+      });
+    });
+
+    orderForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const summary = collectOrderData(true);
+      if(!summary) return;
+      saveOrder(summary);
+      alert('Thank you — your custom order has been submitted. We will contact you within 24 hours.');
+      orderForm.reset();
+    });
+
+    function collectOrderData(returnObj=false){
+      const g = document.getElementById('garment-type').value;
+      const height = document.getElementById('inp-height').value;
+      const weight = document.getElementById('inp-weight').value;
+      const chest = document.getElementById('inp-chest').value;
+      const waist = document.getElementById('inp-waist').value;
+      const fabric = document.getElementById('inp-fabric').value;
+      const color = document.getElementById('inp-color').value;
+      const notes = document.getElementById('inp-notes').value;
+
+      if(!g || !height || !chest || !waist || !fabric || !color){
+        alert('Please complete required fields: garment, height, chest, waist, fabric and color.');
+        return null;
+      }
+
+      const obj = {
+        id: 'ORD-' + Date.now().toString().slice(-6),
+        garment: g,
+        height, weight, chest, waist, fabric, color, notes,
+        created: new Date().toISOString()
+      };
+      return obj;
+    }
+
+    function saveOrder(orderObj){
+      const key = 'hofm_orders_v1';
+      const current = JSON.parse(localStorage.getItem(key) || '[]');
+      current.unshift(orderObj);
+      localStorage.setItem(key, JSON.stringify(current));
+      // for convenience also put last-order
+      localStorage.setItem('hofm_last_order', JSON.stringify(orderObj));
+    }
+
+    /* CONTACT form */
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      alert('Thank you for your message — we will get back to you shortly.');
+      e.target.reset();
+    });
+
+    /* Measurement helper modal (simple visual guidance) */
+    document.getElementById('open-measure-helper').addEventListener('click', () => {
+      modalContent.innerHTML = `
+        <div class="p-6">
+          <div class="flex justify-between items-start mb-4">
+            <h3 class="font-bold text-xl">Visual Measurement Guide</h3>
+            <button id="close-guide" class="text-gray-500">✕</button>
+          </div>
+          <div class="grid md:grid-cols-2 gap-4">
+            <div>
+              <h4 class="font-semibold mb-2">Top Measurements</h4>
+              <ul class="text-gray-700 text-sm space-y-2">
+                <li><strong>Height:</strong> From top of head to floor</li>
+                <li><strong>Chest/Bust:</strong> Fullest part, tape parallel to floor</li>
+                <li><strong>Waist:</strong> Natural waist, snug but not tight</li>
+                <li><strong>Shoulder Width:</strong> From shoulder tip to tip</li>
+              </ul>
+            </div>
+            <div>
+              <h4 class="font-semibold mb-2">Lower / Length</h4>
+              <ul class="text-gray-700 text-sm space-y-2">
+                <li><strong>Hip:</strong> Around fullest part of hips</li>
+                <li><strong>Sleeve:</strong> From shoulder point to wrist</li>
+                <li><strong>Garment Length:</strong> From neck base to desired hem</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      `;
+      backdrop.classList.remove('hidden'); backdrop.classList.add('flex');
+
+      document.getElementById('close-guide').addEventListener('click', closeModal);
+    });
+
+    /* Simple enhancement: persist nav active state on reload (last page) */
+    const last = localStorage.getItem('hofm_last_page') || 'home';
+    showPageId(last);
+
+    // Save visited page
+    document.querySelectorAll('.nav-link, .nav-cta').forEach(btn => {
+      btn.addEventListener('click', () => {
+        const target = btn.dataset.target;
+        if(target) localStorage.setItem('hofm_last_page', target);
+      });
+    });
+
+    /* Small UX: make elements animate into view */
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(en => {
+        if(en.isIntersecting){
+          en.target.classList.add('opacity-100', 'translate-y-0');
+          en.target.classList.remove('opacity-0', '-translate-y-2');
+          observer.unobserve(en.target);
+        }
+      });
+    }, {threshold: .08});
+
+    document.querySelectorAll('.measurement-card, .measurement-card *').forEach(el => {
+      // mark parent cards
+    });
+    document.querySelectorAll('.measurement-card').forEach(card => {
+      card.classList.add('opacity-0','-translate-y-2');
+      observer.observe(card);
+    });
+
+    /* Interaction: gallery-open */
+    document.getElementById('gallery-open').addEventListener('click', () => {
+      // Small gallery: open first item in lightbox
+      openLightbox(sampleCollection[0].id);
+    });
+
+    /* Small accessibility: close modal with Escape */
+    document.addEventListener('keydown', (e) => {
+      if(e.key === 'Escape' && !backdrop.classList.contains('hidden')) closeModal();
+    });
+  </script>
 </body>
 </html>
