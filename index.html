@@ -1,65 +1,728 @@
-
 <!DOCTYPE html>
-<html lang="en" class="dark">
+<html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pure360 | Professional Cleaning Services</title>
-    <script src="https://cdn.tailwindcss.com"></script>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-    <style>
-        body {
-            font-family: 'Inter', sans-serif;
-            background-color: #0f172a;
-            color: #f8fafc;
-            overflow-x: hidden;
-        }
-        .glass {
-            background: rgba(30, 41, 59, 0.7);
-            backdrop-filter: blur(12px);
-            border: 1px solid rgba(255, 255, 255, 0.08);
-        }
-        .gradient-text {
-            background: linear-gradient(135deg, #29a8c2 0%, #3b82f6 50%, #818cf8 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .custom-scrollbar::-webkit-scrollbar {
-            width: 6px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-track {
-            background: rgba(0,0,0,0.1);
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb {
-            background: rgba(255,255,255,0.05);
-            border-radius: 10px;
-        }
-        .custom-scrollbar::-webkit-scrollbar-thumb:hover {
-            background: rgba(41, 168, 194, 0.3);
-        }
-        .animate-pulse-slow {
-            animation: pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite;
-        }
-        @keyframes pulse {
-            0%, 100% { opacity: 1; transform: scale(1); }
-            50% { opacity: .7; transform: scale(0.98); }
-        }
-    </style>
-<script type="importmap">
-{
-  "imports": {
-    "react-dom/": "https://esm.sh/react-dom@^19.2.3/",
-    "@google/genai": "https://esm.sh/@google/genai@^1.34.0",
-    "react/": "https://esm.sh/react@^19.2.3/",
-    "react": "https://esm.sh/react@^19.2.3"
-  }
-}
-</script>
-<link rel="stylesheet" href="/index.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Pure360 — Trusted, affordable cleaning, gardening, and junk removal services in Cape Town. Book online in seconds.">
+  <title>Pure360 | Professional Cleaning Services Cape Town</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+  <style>
+    * { box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'Inter', sans-serif;
+      background-color: #0f172a;
+      color: #f8fafc;
+      overflow-x: hidden;
+    }
+    .glass {
+      background: rgba(30, 41, 59, 0.7);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+    }
+    .gradient-text {
+      background: linear-gradient(135deg, #29a8c2 0%, #3b82f6 50%, #818cf8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+    .glow {
+      box-shadow: 0 0 40px rgba(41, 168, 194, 0.15);
+    }
+    .btn-primary {
+      background: #29a8c2;
+      color: white;
+      padding: 14px 32px;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+      border: none;
+    }
+    .btn-primary:hover { filter: brightness(1.1); transform: translateY(-1px); box-shadow: 0 8px 24px rgba(41,168,194,0.3); }
+    .btn-ghost {
+      background: rgba(30, 41, 59, 0.7);
+      border: 1px solid rgba(255,255,255,0.12);
+      color: white;
+      padding: 14px 32px;
+      border-radius: 9999px;
+      font-weight: 700;
+      transition: all 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      cursor: pointer;
+    }
+    .btn-ghost:hover { background: rgba(30,41,59,0.95); transform: translateY(-1px); }
+    .service-card { transition: all 0.3s; }
+    .service-card:hover { transform: translateY(-4px); border-color: rgba(41,168,194,0.5) !important; box-shadow: 0 16px 40px rgba(0,0,0,0.4); }
+    .service-card .icon { transition: transform 0.3s; }
+    .service-card:hover .icon { transform: scale(1.15); }
+    .step-line { background: linear-gradient(to right, #29a8c2, transparent); }
+    input, select, textarea {
+      background: rgba(15,23,42,0.8);
+      border: 1px solid rgba(255,255,255,0.1);
+      border-radius: 12px;
+      padding: 12px 16px;
+      color: #f8fafc;
+      width: 100%;
+      outline: none;
+      transition: border-color 0.2s;
+      font-family: 'Inter', sans-serif;
+    }
+    input:focus, select:focus, textarea:focus { border-color: #29a8c2; }
+    input::placeholder, textarea::placeholder { color: #475569; }
+    select option { background: #1e293b; color: #f8fafc; }
+    label { font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: 0.12em; color: #64748b; display: block; margin-bottom: 6px; }
+    .nav-link { color: #94a3b8; font-weight: 600; font-size: 14px; text-decoration: none; transition: color 0.2s; padding: 4px 0; }
+    .nav-link:hover { color: #f8fafc; }
+    .badge-active { background: rgba(16,185,129,0.15); color: #34d399; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; }
+    .badge-soon { background: rgba(100,116,139,0.2); color: #64748b; font-size: 10px; font-weight: 700; padding: 3px 10px; border-radius: 9999px; text-transform: uppercase; letter-spacing: 0.1em; }
+    @keyframes float { 0%,100%{transform:translateY(0)}50%{transform:translateY(-10px)} }
+    .float { animation: float 4s ease-in-out infinite; }
+    @keyframes fadeUp { from{opacity:0;transform:translateY(24px)}to{opacity:1;transform:translateY(0)} }
+    .fade-up { animation: fadeUp 0.6s ease forwards; }
+    .fade-up-delay-1 { animation-delay: 0.1s; opacity: 0; }
+    .fade-up-delay-2 { animation-delay: 0.2s; opacity: 0; }
+    .fade-up-delay-3 { animation-delay: 0.3s; opacity: 0; }
+    .whatsapp-fab {
+      position: fixed; bottom: 24px; right: 24px; z-index: 999;
+      background: #25D366; color: white;
+      width: 56px; height: 56px; border-radius: 9999px;
+      display: flex; align-items: center; justify-content: center;
+      box-shadow: 0 8px 24px rgba(37,211,102,0.4);
+      text-decoration: none; font-size: 24px;
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+    .whatsapp-fab:hover { transform: scale(1.1); box-shadow: 0 12px 32px rgba(37,211,102,0.5); }
+    /* Mobile nav */
+    #mobile-menu { display: none; }
+    #mobile-menu.open { display: flex; }
+    /* Calendar */
+    .cal-day { height: 36px; border-radius: 8px; font-size: 12px; font-weight: 600; display: flex; align-items: center; justify-content: center; cursor: pointer; border: 1px solid transparent; transition: all 0.15s; position: relative; }
+    .cal-day.available { border-color: rgba(16,185,129,0.2); color: #cbd5e1; }
+    .cal-day.available:hover { background: rgba(16,185,129,0.1); }
+    .cal-day.selected { background: #29a8c2; color: white; box-shadow: 0 4px 12px rgba(41,168,194,0.4); }
+    .cal-day.past { color: #334155; cursor: not-allowed; }
+    .cal-day.sunday { color: rgba(239,68,68,0.3); cursor: not-allowed; }
+    .cal-dot { width: 5px; height: 5px; border-radius: 9999px; background: #34d399; position: absolute; top: 3px; right: 3px; }
+    /* Modal */
+    .modal-overlay { display: none; position: fixed; inset: 0; background: rgba(0,0,0,0.8); backdrop-filter: blur(4px); z-index: 1000; align-items: center; justify-content: center; padding: 16px; }
+    .modal-overlay.open { display: flex; }
+    /* Scroll reveal */
+    .reveal { opacity: 0; transform: translateY(20px); transition: opacity 0.6s ease, transform 0.6s ease; }
+    .reveal.visible { opacity: 1; transform: none; }
+  </style>
 </head>
 <body>
-    <div id="root"></div>
-    <script type="module" src="index.tsx"></script>
-<script type="module" src="/index.tsx"></script>
+
+<!-- ═══ NAVIGATION ═══ -->
+<nav class="fixed top-0 left-0 right-0 z-50 glass border-b border-white/5">
+  <div class="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
+    <a href="#home" class="flex items-center gap-2 no-underline">
+      <span class="text-white font-black text-xl tracking-tight">Pure<span style="color:#29a8c2">360</span></span>
+      <span class="text-xs text-slate-500 font-bold uppercase tracking-widest hidden sm:block">Cape Town</span>
+    </a>
+    <div class="hidden md:flex items-center gap-8">
+      <a href="#services" class="nav-link">Services</a>
+      <a href="#how-it-works" class="nav-link">How It Works</a>
+      <a href="#book" class="nav-link">Book</a>
+      <a href="#contact" class="nav-link">Contact</a>
+    </div>
+    <div class="flex items-center gap-3">
+      <button onclick="openLoginModal()" class="hidden md:block text-slate-400 hover:text-white text-sm font-semibold transition-colors">Sign In</button>
+      <a href="#book" class="btn-primary" style="padding:10px 20px;font-size:13px;border-radius:9999px">Book Now</a>
+      <button id="hamburger" onclick="toggleMobileNav()" class="md:hidden text-slate-400 hover:text-white p-2">
+        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5"><line x1="3" y1="6" x2="21" y2="6"/><line x1="3" y1="12" x2="21" y2="12"/><line x1="3" y1="18" x2="21" y2="18"/></svg>
+      </button>
+    </div>
+  </div>
+  <!-- Mobile menu -->
+  <div id="mobile-menu" class="md:hidden flex-col px-6 pb-5 gap-4 border-t border-white/5 bg-slate-900/95">
+    <a href="#services" onclick="closeMobileNav()" class="nav-link py-3 border-b border-white/5 block">Services</a>
+    <a href="#how-it-works" onclick="closeMobileNav()" class="nav-link py-3 border-b border-white/5 block">How It Works</a>
+    <a href="#book" onclick="closeMobileNav()" class="nav-link py-3 border-b border-white/5 block">Book a Service</a>
+    <a href="#contact" onclick="closeMobileNav()" class="nav-link py-3 border-b border-white/5 block">Contact</a>
+    <button onclick="openLoginModal();closeMobileNav()" class="nav-link text-left py-3">Sign In / My Account</button>
+  </div>
+</nav>
+
+<!-- ═══ HERO ═══ -->
+<section id="home" class="relative min-h-screen flex items-center pt-16 overflow-hidden">
+  <!-- Background glows -->
+  <div class="absolute top-[-5%] left-[-5%] w-[50%] h-[60%] rounded-full blur-[160px]" style="background:rgba(41,168,194,0.08)"></div>
+  <div class="absolute bottom-[-10%] right-[-5%] w-[40%] h-[50%] rounded-full blur-[160px]" style="background:rgba(59,130,246,0.06)"></div>
+
+  <div class="max-w-7xl mx-auto px-6 py-20 w-full">
+    <div class="max-w-3xl">
+      <div class="inline-flex items-center gap-2 glass px-4 py-2 rounded-full text-xs font-bold text-slate-400 uppercase tracking-widest mb-8 fade-up">
+        <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+        Now accepting bookings · Cape Town
+      </div>
+      <h1 class="text-5xl sm:text-6xl lg:text-7xl font-black text-white leading-[1.05] mb-6 fade-up fade-up-delay-1">
+        Your Space,<br>
+        <span class="gradient-text">Pure &amp; Perfect.</span>
+      </h1>
+      <p class="text-lg sm:text-xl text-slate-400 font-medium mb-10 leading-relaxed max-w-xl fade-up fade-up-delay-2">
+        Trusted and affordable cleaning, gardening, and junk removal services — tailored to your needs, every time.
+      </p>
+      <div class="flex flex-wrap gap-4 fade-up fade-up-delay-3">
+        <a href="#book" class="btn-primary text-base">Book a Service ✨</a>
+        <a href="#services" class="btn-ghost text-base">See All Services</a>
+      </div>
+      <!-- Quick trust signals -->
+      <div class="flex flex-wrap gap-6 mt-12 fade-up fade-up-delay-3">
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-400 text-lg">✓</span>
+          <span class="text-slate-400 text-sm font-semibold">Vetted professionals</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-400 text-lg">✓</span>
+          <span class="text-slate-400 text-sm font-semibold">Transparent flat rates</span>
+        </div>
+        <div class="flex items-center gap-2">
+          <span class="text-emerald-400 text-lg">✓</span>
+          <span class="text-slate-400 text-sm font-semibold">Book in under 60 seconds</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ SERVICES ═══ -->
+<section id="services" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 reveal">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-3">What We Offer</p>
+      <h2 class="text-4xl sm:text-5xl font-black text-white">Our Services</h2>
+      <p class="text-slate-400 mt-4 max-w-lg">From your home to your garden, we've got every corner covered.</p>
+    </div>
+
+    <!-- Active services -->
+    <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 mb-8 reveal">
+      <!-- Cleaning -->
+      <div class="service-card glass p-8 rounded-2xl border border-slate-800 relative overflow-hidden">
+        <span class="badge-active mb-4 inline-block">Available</span>
+        <div class="icon text-5xl mb-5">✨</div>
+        <h3 class="text-xl font-bold text-white mb-3">Cleaning Services</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">Professional interior care for homes, offices, Airbnb rentals, and move-in/out deep cleans.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Home cleaning</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Office cleaning</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Airbnb / short-term rentals</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Pre / post moving</li>
+        </ul>
+        <a href="#book" class="btn-primary" style="padding:10px 20px;font-size:13px;width:100%;justify-content:center">Book Now →</a>
+      </div>
+
+      <!-- Gardening -->
+      <div class="service-card glass p-8 rounded-2xl border border-slate-800 relative overflow-hidden">
+        <span class="badge-active mb-4 inline-block">Available</span>
+        <div class="icon text-5xl mb-5">🌳</div>
+        <h3 class="text-xl font-bold text-white mb-3">Gardening</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">Expert outdoor maintenance to keep your garden looking its best, all year round.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Lawn mowing &amp; edging</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Tree &amp; hedge pruning</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Garden cleanup &amp; waste removal</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> General outdoor maintenance</li>
+        </ul>
+        <a href="#book" class="btn-primary" style="padding:10px 20px;font-size:13px;width:100%;justify-content:center">Book Now →</a>
+      </div>
+
+      <!-- Junk Removal -->
+      <div class="service-card glass p-8 rounded-2xl border border-slate-800 relative overflow-hidden">
+        <span class="badge-active mb-4 inline-block">Available</span>
+        <div class="icon text-5xl mb-5">🚛</div>
+        <h3 class="text-xl font-bold text-white mb-3">Junk Removal</h3>
+        <p class="text-slate-400 text-sm leading-relaxed mb-6">Clear your space the Pure360 way. Responsible disposal of furniture, appliances, and general waste.</p>
+        <ul class="space-y-2 mb-6">
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Furniture &amp; appliance removal</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Building rubble clearance</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> General waste disposal</li>
+          <li class="flex items-center gap-2 text-sm text-slate-400"><span class="text-emerald-400 text-xs">●</span> Free quote, no obligation</li>
+        </ul>
+        <a href="#book" class="btn-primary" style="padding:10px 20px;font-size:13px;width:100%;justify-content:center;background:#f59e0b">Get Free Quote →</a>
+      </div>
+    </div>
+
+    <!-- Coming soon -->
+    <div class="reveal">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-slate-600 mb-4">Coming Soon</p>
+      <div class="grid grid-cols-2 sm:grid-cols-4 gap-4">
+        <div class="glass p-5 rounded-xl border border-slate-800 opacity-60">
+          <span class="text-3xl mb-3 block">🧼</span>
+          <p class="text-sm font-bold text-slate-400">Deep Cleaning</p>
+          <span class="badge-soon mt-2 inline-block">Soon</span>
+        </div>
+        <div class="glass p-5 rounded-xl border border-slate-800 opacity-60">
+          <span class="text-3xl mb-3 block">🏊</span>
+          <p class="text-sm font-bold text-slate-400">Pool Cleaning</p>
+          <span class="badge-soon mt-2 inline-block">Soon</span>
+        </div>
+        <div class="glass p-5 rounded-xl border border-slate-800 opacity-60">
+          <span class="text-3xl mb-3 block">🗑️</span>
+          <p class="text-sm font-bold text-slate-400">Bin Cleaning</p>
+          <span class="badge-soon mt-2 inline-block">Soon</span>
+        </div>
+        <div class="glass p-5 rounded-xl border border-slate-800 opacity-60">
+          <span class="text-3xl mb-3 block">🚗</span>
+          <p class="text-sm font-bold text-slate-400">Car Wash</p>
+          <span class="badge-soon mt-2 inline-block">Soon</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ HOW IT WORKS ═══ -->
+<section id="how-it-works" class="py-24 px-6" style="background:rgba(15,23,42,0.5)">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 reveal">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-3">Simple Process</p>
+      <h2 class="text-4xl sm:text-5xl font-black text-white">How It Works</h2>
+      <p class="text-slate-400 mt-4 max-w-lg">Three easy steps to a cleaner, fresher space.</p>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-8 reveal">
+      <div class="relative">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black mb-6" style="background:rgba(41,168,194,0.15);color:#29a8c2;border:1px solid rgba(41,168,194,0.3)">1</div>
+        <h3 class="text-xl font-bold text-white mb-3">Choose a Service</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Pick from cleaning, gardening, or junk removal. Tell us what you need and where you are.</p>
+        <div class="hidden md:block absolute top-7 left-full w-8 h-[2px] step-line" style="margin-left:8px"></div>
+      </div>
+      <div class="relative">
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black mb-6" style="background:rgba(41,168,194,0.15);color:#29a8c2;border:1px solid rgba(41,168,194,0.3)">2</div>
+        <h3 class="text-xl font-bold text-white mb-3">Submit Your Booking</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Fill in the quick form and hit book. Your request goes straight to us via WhatsApp — we'll confirm within the hour.</p>
+        <div class="hidden md:block absolute top-7 left-full w-8 h-[2px] step-line" style="margin-left:8px"></div>
+      </div>
+      <div>
+        <div class="w-14 h-14 rounded-2xl flex items-center justify-center text-2xl font-black mb-6" style="background:rgba(41,168,194,0.15);color:#29a8c2;border:1px solid rgba(41,168,194,0.3)">3</div>
+        <h3 class="text-xl font-bold text-white mb-3">We Show Up &amp; Deliver</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Our vetted team arrives on time and leaves your space spotless. Satisfaction guaranteed.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ WHY US ═══ -->
+<section class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 reveal">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-3">Why Pure360</p>
+      <h2 class="text-4xl sm:text-5xl font-black text-white">Total Care, Inside and Out</h2>
+    </div>
+    <div class="grid grid-cols-1 sm:grid-cols-3 gap-6 reveal">
+      <div class="glass p-8 rounded-2xl border border-slate-800 hover:border-slate-700 transition-colors">
+        <span class="text-4xl mb-5 block">🛡️</span>
+        <h3 class="text-lg font-bold text-white mb-3">Trusted &amp; Vetted</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">All our service professionals are background-checked, trained, and committed to delivering consistently excellent results.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-slate-800 hover:border-slate-700 transition-colors">
+        <span class="text-4xl mb-5 block">💰</span>
+        <h3 class="text-lg font-bold text-white mb-3">Affordable Rates</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Top-tier service doesn't have to break the bank. We offer transparent, flat-rate pricing — no surprises, no hidden fees.</p>
+      </div>
+      <div class="glass p-8 rounded-2xl border border-slate-800 hover:border-slate-700 transition-colors">
+        <span class="text-4xl mb-5 block">🛠️</span>
+        <h3 class="text-lg font-bold text-white mb-3">Tailored to You</h3>
+        <p class="text-slate-400 text-sm leading-relaxed">Once-off or recurring — weekly, bi-weekly, monthly. We adapt to your schedule and your specific needs, every time.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ BOOKING ═══ -->
+<section id="book" class="py-24 px-6" style="background:rgba(15,23,42,0.5)">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 reveal">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-3">Ready to Book?</p>
+      <h2 class="text-4xl sm:text-5xl font-black text-white">Book a Service</h2>
+      <p class="text-slate-400 mt-4 max-w-lg">Fill in the form below — your booking goes straight to WhatsApp and we'll confirm within the hour.</p>
+    </div>
+
+    <div class="flex flex-col lg:flex-row gap-8 max-w-5xl reveal">
+      <!-- Form -->
+      <div class="flex-1 glass p-8 rounded-3xl border border-slate-800 glow">
+        <div id="booking-form">
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label>Service Type</label>
+              <select id="svc-main" onchange="handleServiceChange()">
+                <option value="cleaning">Cleaning Services</option>
+                <option value="garden">Gardening</option>
+                <option value="junk">Junk Removal</option>
+              </select>
+            </div>
+            <div id="sub-svc-wrap">
+              <label>Cleaning Type</label>
+              <select id="svc-sub">
+                <option value="Home cleaning">Home cleaning</option>
+                <option value="Office cleaning">Office cleaning</option>
+                <option value="Airbnb / Short-term rental">Airbnb / Short-term rental</option>
+                <option value="Pre / Post moving cleaning">Pre / Post moving cleaning</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label>Frequency</label>
+              <select id="svc-freq">
+                <option value="Once-off">Once-off</option>
+                <option value="Weekly">Weekly</option>
+                <option value="Bi-weekly">Bi-weekly</option>
+                <option value="Monthly">Monthly</option>
+              </select>
+            </div>
+            <div>
+              <label>Full Name</label>
+              <input id="f-name" type="text" placeholder="John Doe">
+            </div>
+          </div>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-5 mb-5">
+            <div>
+              <label>Phone Number</label>
+              <input id="f-phone" type="tel" placeholder="076 000 0000">
+            </div>
+            <div>
+              <label>Email (optional)</label>
+              <input id="f-email" type="email" placeholder="email@example.com">
+            </div>
+          </div>
+
+          <div class="mb-5">
+            <label>Address / Location</label>
+            <textarea id="f-address" rows="2" placeholder="123 Ocean View Drive, Cape Town..."></textarea>
+          </div>
+
+          <div class="mb-6">
+            <label>Additional Notes (optional)</label>
+            <textarea id="f-notes" rows="2" placeholder="Anything we should know? (e.g. access codes, specific areas, pet info...)"></textarea>
+          </div>
+
+          <button onclick="submitBooking()" class="btn-primary w-full justify-center text-base" style="border-radius:12px;padding:16px">
+            <span id="submit-label">Send Booking via WhatsApp 💬</span>
+          </button>
+          <p class="text-center text-xs text-slate-500 mt-3">Opens WhatsApp — confirm your selected date in the chat.</p>
+        </div>
+
+        <!-- Success state (hidden) -->
+        <div id="booking-success" style="display:none" class="text-center py-10">
+          <div class="w-16 h-16 rounded-full flex items-center justify-center mx-auto mb-5 text-3xl" style="background:rgba(16,185,129,0.15)">✓</div>
+          <h3 class="text-2xl font-bold text-white mb-2">WhatsApp Opened!</h3>
+          <p class="text-slate-400 mb-6 text-sm">Your booking details have been pre-filled. Just tap Send in WhatsApp and we'll confirm within the hour.</p>
+          <button onclick="resetBooking()" class="btn-ghost" style="border-radius:12px;padding:12px 24px;font-size:14px">Book Another Service</button>
+        </div>
+      </div>
+
+      <!-- Calendar -->
+      <div class="lg:w-80">
+        <label style="margin-bottom:12px;display:block">Preferred Date</label>
+        <div class="glass p-5 rounded-2xl border border-slate-800">
+          <div class="flex justify-between items-center mb-4">
+            <h4 id="cal-month-label" class="text-sm font-bold text-white"></h4>
+            <div class="flex gap-2">
+              <button onclick="calPrev()" class="p-1.5 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 text-sm">←</button>
+              <button onclick="calNext()" class="p-1.5 hover:bg-slate-800 rounded-lg transition-colors text-slate-400 text-sm">→</button>
+            </div>
+          </div>
+          <div class="grid grid-cols-7 gap-1 mb-2">
+            <span class="text-center text-red-500/40 text-xs font-black">S</span>
+            <span class="text-center text-slate-500 text-xs font-black">M</span>
+            <span class="text-center text-slate-500 text-xs font-black">T</span>
+            <span class="text-center text-slate-500 text-xs font-black">W</span>
+            <span class="text-center text-slate-500 text-xs font-black">T</span>
+            <span class="text-center text-slate-500 text-xs font-black">F</span>
+            <span class="text-center text-slate-500 text-xs font-black">S</span>
+          </div>
+          <div id="cal-grid" class="grid grid-cols-7 gap-1"></div>
+          <div class="mt-4 pt-3 border-t border-slate-800 flex gap-4 text-xs text-slate-500 font-bold">
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-emerald-400 inline-block"></span> Available</span>
+            <span class="flex items-center gap-1"><span class="w-2 h-2 rounded-full bg-red-400/30 inline-block"></span> Closed</span>
+          </div>
+        </div>
+        <div id="selected-date-display" class="mt-3 text-center text-xs text-slate-500 font-semibold"></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ CONTACT ═══ -->
+<section id="contact" class="py-24 px-6">
+  <div class="max-w-7xl mx-auto">
+    <div class="mb-14 reveal">
+      <p class="text-xs font-black uppercase tracking-[0.25em] text-slate-500 mb-3">Get In Touch</p>
+      <h2 class="text-4xl sm:text-5xl font-black text-white">Contact Us</h2>
+    </div>
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 reveal">
+      <a href="https://wa.me/27764002332" target="_blank" rel="noopener" class="glass p-7 rounded-2xl border border-slate-800 hover:border-emerald-500/30 transition-all group no-underline">
+        <span class="text-3xl mb-4 block">💬</span>
+        <h3 class="text-lg font-bold text-white mb-1 group-hover:text-emerald-400 transition-colors">WhatsApp</h3>
+        <p class="text-slate-400 text-sm">076 400 2332</p>
+        <p class="text-xs text-slate-500 mt-2">Fastest response · Mon–Sat</p>
+      </a>
+      <a href="tel:+27764002332" class="glass p-7 rounded-2xl border border-slate-800 hover:border-slate-700 transition-all group no-underline">
+        <span class="text-3xl mb-4 block">📞</span>
+        <h3 class="text-lg font-bold text-white mb-1">Phone</h3>
+        <p class="text-slate-400 text-sm">076 400 2332</p>
+        <p class="text-xs text-slate-500 mt-2">Mon–Sat · 07:00–18:00</p>
+      </a>
+      <div class="glass p-7 rounded-2xl border border-slate-800">
+        <span class="text-3xl mb-4 block">📍</span>
+        <h3 class="text-lg font-bold text-white mb-1">Location</h3>
+        <p class="text-slate-400 text-sm">Cape Town, South Africa</p>
+        <p class="text-xs text-slate-500 mt-2">Serving greater Cape Town area</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══ FOOTER ═══ -->
+<footer class="border-t border-slate-800 py-10 px-6">
+  <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+    <div class="flex items-center gap-2">
+      <span class="text-white font-black text-lg">Pure<span style="color:#29a8c2">360</span></span>
+      <span class="text-slate-600 text-xs">·</span>
+      <span class="text-slate-500 text-xs">Total Care, Inside and Out</span>
+    </div>
+    <p class="text-slate-600 text-xs">&copy; 2026 Pure360 Cleaning Services · Cape Town</p>
+    <div class="flex gap-6">
+      <a href="#services" class="text-slate-500 text-xs hover:text-slate-300">Services</a>
+      <a href="#book" class="text-slate-500 text-xs hover:text-slate-300">Book</a>
+      <a href="#contact" class="text-slate-500 text-xs hover:text-slate-300">Contact</a>
+    </div>
+  </div>
+</footer>
+
+<!-- ═══ WHATSAPP FAB ═══ -->
+<a href="https://wa.me/27764002332" target="_blank" rel="noopener" class="whatsapp-fab" title="Chat on WhatsApp">
+  <svg viewBox="0 0 24 24" width="26" height="26" fill="white"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+</a>
+
+<!-- ═══ LOGIN MODAL ═══ -->
+<div id="login-modal" class="modal-overlay">
+  <div class="glass p-10 rounded-3xl border border-slate-700 max-w-md w-full shadow-2xl">
+    <div class="flex justify-between items-start mb-8">
+      <div>
+        <h2 class="text-2xl font-black text-white">Pure360 <span style="color:#29a8c2">ID</span></h2>
+        <p class="text-slate-500 text-xs font-bold uppercase tracking-widest mt-1">Sign In to Your Account</p>
+      </div>
+      <button onclick="closeLoginModal()" class="text-slate-500 hover:text-white p-1">✕</button>
+    </div>
+    <div id="login-content">
+      <div class="space-y-3">
+        <button onclick="socialLogin('WhatsApp')" class="w-full py-4 rounded-2xl font-bold text-white flex items-center justify-center gap-3 transition-all hover:opacity-90" style="background:#25D366">
+          💬 Continue with WhatsApp
+        </button>
+        <div class="grid grid-cols-2 gap-3">
+          <button onclick="socialLogin('Google')" class="py-3 rounded-2xl font-bold text-sm transition-all flex items-center justify-center gap-2 border border-slate-700 hover:bg-slate-800 text-white" style="background:rgba(30,41,59,0.8)">
+            G Google
+          </button>
+          <button onclick="socialLogin('Facebook')" class="py-3 rounded-2xl font-bold text-sm transition-all flex items-center justify-center gap-2 text-white hover:opacity-90" style="background:#1877F2">
+            f Facebook
+          </button>
+        </div>
+        <div class="relative py-3 flex items-center justify-center">
+          <div class="absolute inset-0 flex items-center"><div class="w-full border-t border-slate-800"></div></div>
+          <span class="relative px-4 text-xs font-black text-slate-600 uppercase tracking-widest" style="background:#0f172a">or</span>
+        </div>
+        <div>
+          <label>SA Phone Number</label>
+          <div class="flex gap-2">
+            <div class="glass rounded-xl px-3 py-3 text-slate-400 text-sm font-bold flex-shrink-0 border border-slate-700">+27</div>
+            <input id="login-phone" type="tel" placeholder="076 000 0000">
+          </div>
+        </div>
+        <button onclick="loginWithPhone()" class="w-full py-4 rounded-2xl font-bold text-white transition-all" style="background:#29a8c2">Continue</button>
+      </div>
+      <p class="text-center text-xs text-slate-600 mt-6 leading-relaxed">By continuing, you agree to our Terms of Service and Privacy Policy.</p>
+    </div>
+    <div id="login-success" style="display:none" class="text-center py-6">
+      <div class="text-4xl mb-4">✅</div>
+      <h3 class="text-xl font-bold text-white mb-2">Signed In!</h3>
+      <p id="login-welcome" class="text-slate-400 text-sm mb-6"></p>
+      <button onclick="closeLoginModal()" class="btn-primary" style="border-radius:12px;padding:12px 24px">Continue Browsing</button>
+    </div>
+  </div>
+</div>
+
+<script>
+// ── Calendar ──────────────────────────────────────────────────────────
+let calDate = new Date();
+let selectedDate = '';
+
+const MONTH_NAMES = ['January','February','March','April','May','June','July','August','September','October','November','December'];
+
+function renderCalendar() {
+  const m = calDate.getMonth(), y = calDate.getFullYear();
+  document.getElementById('cal-month-label').textContent = `${MONTH_NAMES[m]} ${y}`;
+
+  const today = new Date(); today.setHours(0,0,0,0);
+  const firstDay = new Date(y, m, 1).getDay();
+  const daysInMonth = new Date(y, m+1, 0).getDate();
+  const grid = document.getElementById('cal-grid');
+  grid.innerHTML = '';
+
+  for (let i = 0; i < firstDay; i++) {
+    const blank = document.createElement('div');
+    grid.appendChild(blank);
+  }
+
+  const isAfter6am = new Date().getHours() >= 6;
+
+  for (let d = 1; d <= daysInMonth; d++) {
+    const cell = document.createElement('div');
+    const dateObj = new Date(y, m, d);
+    const dateStr = `${y}-${String(m+1).padStart(2,'0')}-${String(d).padStart(2,'0')}`;
+    const isSunday = dateObj.getDay() === 0;
+    const isPast = dateObj < today;
+    const isToday = dateObj.getTime() === today.getTime() && isAfter6am;
+
+    cell.className = 'cal-day';
+    cell.textContent = d;
+
+    if (isPast || isToday) {
+      cell.classList.add('past');
+    } else if (isSunday) {
+      cell.classList.add('sunday');
+    } else {
+      cell.classList.add('available');
+      const dot = document.createElement('div');
+      dot.className = 'cal-dot';
+      cell.appendChild(dot);
+      if (dateStr === selectedDate) cell.classList.add('selected');
+      cell.onclick = () => selectDate(dateStr);
+    }
+
+    grid.appendChild(cell);
+  }
+}
+
+function selectDate(d) {
+  selectedDate = d;
+  const [y,m,day] = d.split('-');
+  const dateObj = new Date(y, m-1, day);
+  const formatted = dateObj.toLocaleDateString('en-ZA', { weekday:'long', year:'numeric', month:'long', day:'numeric' });
+  document.getElementById('selected-date-display').innerHTML = `<span style="color:#29a8c2">📅 ${formatted}</span>`;
+  renderCalendar();
+}
+
+function calPrev() { calDate = new Date(calDate.getFullYear(), calDate.getMonth()-1, 1); renderCalendar(); }
+function calNext() { calDate = new Date(calDate.getFullYear(), calDate.getMonth()+1, 1); renderCalendar(); }
+
+// ── Service dropdown logic ──────────────────────────────────────────
+function handleServiceChange() {
+  const svc = document.getElementById('svc-main').value;
+  const subWrap = document.getElementById('sub-svc-wrap');
+  subWrap.style.display = svc === 'cleaning' ? 'block' : 'none';
+}
+
+// ── Booking submission → WhatsApp ──────────────────────────────────
+function submitBooking() {
+  const name = document.getElementById('f-name').value.trim();
+  const phone = document.getElementById('f-phone').value.trim();
+  const address = document.getElementById('f-address').value.trim();
+  const svc = document.getElementById('svc-main').value;
+  const freq = document.getElementById('svc-freq').value;
+  const notes = document.getElementById('f-notes').value.trim();
+
+  if (!name) { alert('Please enter your name.'); return; }
+  if (!phone) { alert('Please enter your phone number.'); return; }
+  if (!address) { alert('Please enter your address.'); return; }
+
+  let svcLabel = '';
+  if (svc === 'cleaning') {
+    svcLabel = document.getElementById('svc-sub').value;
+  } else if (svc === 'garden') {
+    svcLabel = 'Gardening';
+  } else {
+    svcLabel = 'Junk Removal';
+  }
+
+  const datePart = selectedDate ? `📅 Date: ${selectedDate}` : '📅 Date: TBD (please confirm)';
+  const notesPart = notes ? `\n📝 Notes: ${notes}` : '';
+
+  const msg = encodeURIComponent(
+    `Hi Pure360! I'd like to book a service.\n\n` +
+    `🧹 Service: ${svcLabel}\n` +
+    `🔁 Frequency: ${freq}\n` +
+    `${datePart}\n` +
+    `👤 Name: ${name}\n` +
+    `📞 Phone: ${phone}\n` +
+    `📍 Address: ${address}` +
+    notesPart
+  );
+
+  window.open(`https://wa.me/27764002332?text=${msg}`, '_blank');
+
+  document.getElementById('booking-form').style.display = 'none';
+  document.getElementById('booking-success').style.display = 'block';
+}
+
+function resetBooking() {
+  document.getElementById('booking-form').style.display = 'block';
+  document.getElementById('booking-success').style.display = 'none';
+  document.getElementById('f-name').value = '';
+  document.getElementById('f-phone').value = '';
+  document.getElementById('f-email').value = '';
+  document.getElementById('f-address').value = '';
+  document.getElementById('f-notes').value = '';
+  selectedDate = '';
+  document.getElementById('selected-date-display').textContent = '';
+  renderCalendar();
+}
+
+// ── Mobile nav ─────────────────────────────────────────────────────
+function toggleMobileNav() {
+  document.getElementById('mobile-menu').classList.toggle('open');
+}
+function closeMobileNav() {
+  document.getElementById('mobile-menu').classList.remove('open');
+}
+
+// ── Login modal ────────────────────────────────────────────────────
+function openLoginModal() {
+  document.getElementById('login-modal').classList.add('open');
+  document.getElementById('login-content').style.display = 'block';
+  document.getElementById('login-success').style.display = 'none';
+}
+function closeLoginModal() {
+  document.getElementById('login-modal').classList.remove('open');
+}
+document.getElementById('login-modal').addEventListener('click', function(e) {
+  if (e.target === this) closeLoginModal();
+});
+
+function socialLogin(provider) {
+  document.getElementById('login-content').style.display = 'none';
+  document.getElementById('login-success').style.display = 'block';
+  document.getElementById('login-welcome').textContent = `Welcome back! You're signed in via ${provider}.`;
+}
+
+function loginWithPhone() {
+  const phone = document.getElementById('login-phone').value.trim();
+  if (!phone) { alert('Please enter your phone number.'); return; }
+  document.getElementById('login-content').style.display = 'none';
+  document.getElementById('login-success').style.display = 'block';
+  document.getElementById('login-welcome').textContent = `Welcome! You're signed in as ${phone}.`;
+}
+
+// ── Scroll reveal ──────────────────────────────────────────────────
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(e => { if (e.isIntersecting) e.target.classList.add('visible'); });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => observer.observe(el));
+
+// ── Init ──────────────────────────────────────────────────────────
+renderCalendar();
+</script>
+
 </body>
 </html>
